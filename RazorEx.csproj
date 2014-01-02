@@ -61,7 +61,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Razor">
-      <HintPath>..\..\UO\Auberon\Razor\Razor.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\UO\Auberon\Razor\Razor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -70,7 +70,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Ultima">
-      <HintPath>..\..\UO\Auberon\Razor\Ultima.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\UO\Auberon\Razor\Ultima.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -100,5 +100,7 @@
     <Spellbook primary="Disarm" secondary="ParalyzingBlow">0x0EFA</Spellbook>
     <SpellweavingBook primary="Disarm" secondary="ParalyzingBlow">0x2D50</SpellweavingBook>
     <FishingPole primary="Disarm" secondary="ParalyzingBlow">0x0DC0</FishingPole>
+    <Wand primary="Disarm" secondary="ParalyzingBlow">0x0F6B</Wand>
+    <Torch primary="Dismount" secondary="Disarm">0x0DF4</Torch>
   </None>
 </WeaponAbilities>
