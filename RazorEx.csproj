@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{605A0AC4-6C54-491C-A05F-284F1DB3ABED}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RazorEx</RootNamespace>
+    <AssemblyName>RazorEx</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>False</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <RunCodeAnalysis>False</RunCodeAnalysis>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\..\..\UO\Auberon\Razor\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Razor">
+      <HintPath>..\..\UO\Auberon\Razor\Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Ultima">
+      <HintPath>..\..\UO\Auberon\Razor\Ultima.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Addons\BackpackOrganizer.cs" />
+    <Compile Include="Addons\Cleaner.cs" />
+    <Compile Include="Addons\Evasion.cs" />
+    <Compile Include="Addons\MassMove.cs" />
+    <Compile Include="DragDrop.cs" />
+    <Compile Include="Skills\Fishing.cs" />
+    <Compile Include="Addons\PotionStack.cs" />
+    <Compile Include="Addons\WeaponMoves.cs" />
+    <Compile Include="Bandages.cs" />
+    <Compile Include="Bank.cs" />
+    <Compile Include="BuffIcons.cs" />
+    <Compile Include="Event.cs" />
+    <Compile Include="Fixes\AutoLogin.cs" />
+    <Compile Include="Fixes\BardSkills.cs" />
+    <Compile Include="Fixes\ContainerClosingFix.cs" />
+    <Compile Include="Fixes\FriendlyFire.cs" />
+    <Compile Include="Fixes\ItemProps.cs" />
+    <Compile Include="Fixes\SOS.cs" />
+    <Compile Include="Fixes\Undead.cs" />
+    <Compile Include="Honor.cs" />
+    <Compile Include="PositionCheck.cs" />
+    <Compile Include="Skills\FishingCarving.cs" />
+    <Compile Include="Skills\FishingCollector.cs" />
+    <Compile Include="Skills\FishingSOS.cs" />
+    <Compile Include="Skills\FishingTracking.cs" />
+    <Compile Include="UI\BuffBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ArtBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\MapControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Radar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\RichtextBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WeaponAbilities.cs" />
+    <Compile Include="Addons\AFK.cs" />
+    <Compile Include="Addons\AutoGrab.cs" />
+    <Compile Include="Addons\BloodOath.cs" />
+    <Compile Include="Addons\BoneCarving.cs" />
+    <Compile Include="Addons\LegendaryPickaxe.cs" />
+    <Compile Include="Addons\Other.cs" />
+    <Compile Include="Addons\Spells.cs" />
+    <Compile Include="Addons\GiftOfLife.cs" />
+    <Compile Include="Addons\Macros.cs" />
+    <Compile Include="Addons\Summoning.cs" />
+    <Compile Include="ConfigAgent.cs" />
+    <Compile Include="ConfigEx.cs" />
+    <Compile Include="Addons\NPCAbilities.cs" />
+    <Compile Include="Addons\ClilocFilter.cs" />
+    <Compile Include="Addons\Commands.cs" />
+    <Compile Include="Addons\Healing.cs" />
+    <Compile Include="Addons\Pets.cs" />
+    <Compile Include="Addons\Looting.cs" />
+    <Compile Include="Fixes\AutoopenCorpses.cs" />
+    <Compile Include="Fixes\ContainerPositionFix.cs" />
+    <Compile Include="Fixes\DamageShrink.cs" />
+    <Compile Include="Fixes\Dress.cs" />
+    <Compile Include="Fixes\LootBag.cs" />
+    <Compile Include="Fixes\Maps.cs" />
+    <Compile Include="Fixes\Stealth.cs" />
+    <Compile Include="Fixes\Targeting.cs" />
+    <Compile Include="UI\Bar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\InGameWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Chat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\LabelEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\SkillIcon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SpellIcon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\StatusBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OpenEUO.cs" />
+    <Compile Include="Core.cs" />
+    <Compile Include="UI\MainFormEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Packets.cs" />
+    <Compile Include="StartInfo.cs" />
+    <Compile Include="WorldEx.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="WeaponAbilities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BuffIcons.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

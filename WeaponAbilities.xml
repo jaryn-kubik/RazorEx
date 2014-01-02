@@ -1,0 +1,104 @@
+﻿<WeaponAbilities>
+  <Axes>
+    <Axe primary="CrushingBlow" secondary="Dismount">0x0F49</Axe>
+    <BattleAxe primary="BleedAttack" secondary="ConcussionBlow">0x0F47</BattleAxe>
+    <DoubleAxe primary="DoubleStrike" secondary="WhirlwindAttack">0x0F4B</DoubleAxe>
+    <ExecutionersAxe primary="BleedAttack" secondary="MortalStrike">0x0F45</ExecutionersAxe>
+    <Hatchet primary="ArmorIgnore" secondary="Disarm">0x0F43</Hatchet>
+    <LargeBattleAxe primary="WhirlwindAttack" secondary="BleedAttack">0x13FB</LargeBattleAxe>
+    <Pickaxe primary="DoubleStrike" secondary="Disarm">0x0E86</Pickaxe>
+    <TwoHandedAxe primary="DoubleStrike" secondary="ShadowStrike">0x1443</TwoHandedAxe>
+    <WarAxe primary="ArmorIgnore" secondary="BleedAttack">0x13B0</WarAxe>
+  </Axes>
+  <Knives>
+    <ButcherKnife primary="InfectiousStrike" secondary="Disarm">0x13F6</ButcherKnife>
+    <Cleaver primary="BleedAttack" secondary="InfectiousStrike">0x0EC3</Cleaver>
+    <Dagger primary="InfectiousStrike" secondary="ShadowStrike">0x0F52</Dagger>
+    <SkinningKnife primary="ShadowStrike" secondary="Disarm">0x0EC4</SkinningKnife>
+  </Knives>
+  <Maces>
+    <Club primary="ShadowStrike" secondary="Dismount">0x13B4</Club>
+    <HammerPick primary="ArmorIgnore" secondary="MortalStrike">0x143D</HammerPick>
+    <Mace primary="ConcussionBlow" secondary="Disarm">0x0F5C</Mace>
+    <Maul primary="CrushingBlow" secondary="ConcussionBlow">0x143B</Maul>
+    <Scepter primary="CrushingBlow" secondary="MortalStrike">0x26BC</Scepter>
+    <WarHammer primary="WhirlwindAttack" secondary="CrushingBlow">0x1439</WarHammer>
+    <WarMace primary="CrushingBlow" secondary="BleedAttack">0x1407</WarMace>
+  </Maces>
+  <PoleArms>
+    <Bardiche primary="ParalyzingBlow" secondary="Dismount">0x0F4D</Bardiche>
+    <Halberd primary="WhirlwindAttack" secondary="ConcussionBlow">0x143E</Halberd>
+    <Scythe primary="BleedAttack" secondary="ParalyzingBlow">0x26BA</Scythe>
+  </PoleArms>
+  <Ranged>
+    <Bow primary="ParalyzingBlow" secondary="MortalStrike">0x13B2</Bow>
+    <CompositeBow primary="ArmorIgnore" secondary="MovingShot">0x26C2</CompositeBow>
+    <Crossbow primary="ConcussionBlow" secondary="MortalStrike">0x0F50</Crossbow>
+    <HeavyCrossbow primary="MovingShot" secondary="Dismount">0x13FD</HeavyCrossbow>
+    <RepeatingCrossbow primary="DoubleStrike" secondary="MovingShot">0x26C3</RepeatingCrossbow>
+  </Ranged>
+  <SpearsAndForks>
+    <BladedStaff primary="ArmorIgnore" secondary="Dismount">0x26BD</BladedStaff>
+    <DoubleBladedStaff primary="DoubleStrike" secondary="InfectiousStrike">0x26BF</DoubleBladedStaff>
+    <Pike primary="ParalyzingBlow" secondary="InfectiousStrike">0x26BE</Pike>
+    <Pitchfork primary="BleedAttack" secondary="Dismount">0x0E87</Pitchfork>
+    <ShortSpear primary="ShadowStrike" secondary="MortalStrike">0x1403</ShortSpear>
+    <Spear primary="ArmorIgnore" secondary="ParalyzingBlow">0x0F62</Spear>
+    <WarFork primary="BleedAttack" secondary="Disarm">0x1405</WarFork>
+  </SpearsAndForks>
+  <Staves>
+    <BlackStaff primary="WhirlwindAttack" secondary="ParalyzingBlow">0x0DF0</BlackStaff>
+    <GnarledStaff primary="ConcussionBlow" secondary="ParalyzingBlow">0x13F8</GnarledStaff>
+    <QuarterStaff primary="DoubleStrike" secondary="ConcussionBlow">0x0E89</QuarterStaff>
+    <ShepherdsCrook primary="CrushingBlow" secondary="Disarm">0x0E81</ShepherdsCrook>
+  </Staves>
+  <Swords>
+    <BoneHarvester primary="ParalyzingBlow" secondary="MortalStrike">0x26BB</BoneHarvester>
+    <Broadsword primary="CrushingBlow" secondary="ArmorIgnore">0x0F5E</Broadsword>
+    <CrescentBlade primary="DoubleStrike" secondary="MortalStrike">0x26C1</CrescentBlade>
+    <Cutlass primary="BleedAttack" secondary="ShadowStrike">0x1441</Cutlass>
+    <Katana primary="DoubleStrike" secondary="ArmorIgnore">0x13FF</Katana>
+    <Kryss primary="ArmorIgnore" secondary="InfectiousStrike">0x1401</Kryss>
+    <Kryss2 primary="ArmorIgnore" secondary="InfectiousStrike">0x1400</Kryss2>
+    <Lance primary="Dismount" secondary="ConcussionBlow">0x26C0</Lance>
+    <Longsword primary="ArmorIgnore" secondary="ConcussionBlow">0x0F61</Longsword>
+    <PaladinSword primary="WhirlwindAttack" secondary="Disarm">0x26CE</PaladinSword>
+    <Scimitar primary="DoubleStrike" secondary="ParalyzingBlow">0x13B6</Scimitar>
+    <VikingSword primary="CrushingBlow" secondary="ParalyzingBlow">0x13B9</VikingSword>
+  </Swords>
+  <MLWeapons>
+    <AssassinSpike primary="InfectiousStrike" secondary="ShadowStrike">0x2D21</AssassinSpike>
+    <DiamondMace primary="ConcussionBlow" secondary="CrushingBlow">0x2D24</DiamondMace>
+    <ElvenCompositeLongbow primary="ForceArrow" secondary="SerpentArrow">0x2D1E</ElvenCompositeLongbow>
+    <ElvenMachete primary="DefenseMastery" secondary="Bladeweave">0x2D35</ElvenMachete>
+    <ElvenSpellblade primary="PsychicAttack" secondary="BleedAttack">0x2D20</ElvenSpellblade>
+    <Leafblade primary="Feint" secondary="ArmorIgnore">0x2D22</Leafblade>
+    <MagicalShortbow primary="LightningArrow" secondary="PsychicAttack">0x2D2B</MagicalShortbow>
+    <OrnateAxe primary="Disarm" secondary="CrushingBlow">0x2D28</OrnateAxe>
+    <RadiantScimitar primary="WhirlwindAttack" secondary="Bladeweave">0x2D33</RadiantScimitar>
+    <RuneBlade primary="Disarm" secondary="Bladeweave">0x2D32</RuneBlade>
+    <WarCleaver primary="Disarm" secondary="Bladeweave">0x2D2F</WarCleaver>
+    <WildStaff primary="Block" secondary="ForceOfNature">0x2D25</WildStaff>
+  </MLWeapons>
+  <SEWeapons>
+    <Bokuto primary="Feint" secondary="NerveStrike">0x27A8</Bokuto>
+    <Daisho primary="Feint" secondary="DoubleStrike">0x27A9</Daisho>
+    <Kama primary="WhirlwindAttack" secondary="DefenseMastery">0x27AD</Kama>
+    <Lajatang primary="DefenseMastery" secondary="FrenziedWhirlwind">0x27A7</Lajatang>
+    <NoDachi primary="CrushingBlow" secondary="RidingSwipe">0x27A2</NoDachi>
+    <Nunchaku primary="Block" secondary="Feint">0x27AE</Nunchaku>
+    <Sai primary="Block" secondary="ArmorPierce">0x27AF</Sai>
+    <Tekagi primary="DualWield" secondary="TalonStrike">0x27AB</Tekagi>
+    <Tessen primary="Feint" secondary="Block">0x27A3</Tessen>
+    <Tetsubo primary="FrenziedWhirlwind" secondary="CrushingBlow">0x27A6</Tetsubo>
+    <Wakizashi primary="FrenziedWhirlwind" secondary="DoubleStrike">0x27A4</Wakizashi>
+    <Yumi primary="ArmorPierce" secondary="DoubleShot">0x27A5</Yumi>
+  </SEWeapons>
+  <None>
+    <Fists primary="Disarm" secondary="ParalyzingBlow">0x0000</Fists>
+    <NecromancerSpellbook primary="Disarm" secondary="ParalyzingBlow">0x2253</NecromancerSpellbook>
+    <Spellbook primary="Disarm" secondary="ParalyzingBlow">0x0EFA</Spellbook>
+    <SpellweavingBook primary="Disarm" secondary="ParalyzingBlow">0x2D50</SpellweavingBook>
+    <FishingPole primary="Disarm" secondary="ParalyzingBlow">0x0DC0</FishingPole>
+  </None>
+</WeaponAbilities>
