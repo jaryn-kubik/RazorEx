@@ -3,6 +3,7 @@ using Assistant.Macros;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RazorEx.Addons
 {
@@ -78,6 +79,7 @@ namespace RazorEx.Addons
 
         private static bool IsKey(Item i) { return i.ItemID == 0x1013 || i.ItemID == 0x1B12 || i.ItemID == 0x14FD; }
         private static bool IsLockpick(Item i) { return i.ItemID == 0x14FD && i.Hue == 0x0000; }
+        private static bool IsSwitch(Item i) { return i.ItemID >= 0x108C && i.ItemID <= 0x1095; }
         private static void UseKey()
         {
             lock (list)
@@ -93,17 +95,37 @@ namespace RazorEx.Addons
 
                 if (item != null)
                 {
-                    list.Add(item.Serial);
-                    list.RemoveAll(i => !World.Items.ContainsKey(i));
-
                     door = WorldEx.FindItem(i => i.IsDoor && i.DistanceTo(World.Player) <= 1);
                     if (door != null)
                         timer.Start();
+                    else
+                    {
+                        Item item2 = WorldEx.FindItemsG(i => IsSwitch(i) && i.DistanceTo(World.Player) < 3)
+                            .OrderBy(i => Utility.DistanceSqrt(i.Position, World.Player.Position))
+                            .FirstOrDefault();
+                        if (item2 != null)
+                            item = item2;
+                    }
+
+                    if (!IsSwitch(item))
+                    {
+                        list.Add(item.Serial);
+                        list.RemoveAll(i => !World.Items.ContainsKey(i));
+                    }
 
                     WorldEx.SendToServer(new DoubleClick(item.Serial));
                 }
                 else
-                    WorldEx.SendMessage("No key found.");
+                {
+                    item = WorldEx.FindItemsG(i => IsSwitch(i) && i.DistanceTo(World.Player) < 3)
+                        .OrderBy(i => Utility.DistanceSqrt(i.Position, World.Player.Position))
+                        .FirstOrDefault();
+
+                    if (item != null)
+                        WorldEx.SendToServer(new DoubleClick(item.Serial));
+                    else
+                        WorldEx.SendMessage("No key found.");
+                }
             }
         }
 

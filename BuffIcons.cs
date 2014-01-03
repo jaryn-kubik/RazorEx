@@ -50,10 +50,24 @@ namespace RazorEx
 
         private static void OnUnicodeMessage(PacketReader p, PacketHandlerEventArgs args)
         {
-            if (p.ReadUInt32() == 0xFFFFFFFF && p.ReadUInt16() == 0xFFFF && p.ReadByte() == 0 && p.ReadUInt16() == 0x03B2
-                && p.ReadUInt16() == 3 && p.ReadStringSafe(4) == "ENU" && p.ReadStringSafe(30) == "System"
-                && p.ReadUnicodeStringSafe() == "Silence faded")
+            Serial serial = p.ReadUInt32();
+            ItemID itemID = p.ReadUInt16();
+            byte mode = p.ReadByte();
+            ushort color = p.ReadUInt16();
+            ushort font = p.ReadUInt16();
+            string lang = p.ReadStringSafe(4);
+            string name = p.ReadStringSafe(30);
+            string text = p.ReadUnicodeStringSafe();
+
+            if (serial == 0xFFFFFFFF && itemID == 0xFFFF && mode == 0 && color == 0x03B2 && font == 3 &&
+                lang == "ENU" && name == "System" && text == "Silence faded")
                 RemoveBuff(BuffIcon.Silence);
+            else if (serial == World.Player.Serial && mode == 2 && color == 0x0225 && font == 3 &&
+                     lang == "ENU" && text.StartsWith("Flames of revenge"))
+            {
+                RemoveBuff(BuffIcon.FlamesOfRevenge);
+                AddBuff(BuffIcon.FlamesOfRevenge, -2, -2, text.Substring(21, text.Length - 22), 90);
+            }
         }
 
         public static ushort GetGumpID(BuffIcon buffID) { return buffIcons[buffID]; }
@@ -156,8 +170,20 @@ namespace RazorEx
 
         public BuffInfo(int primaryCliloc, int secondaryCliloc, string args, ushort duration)
         {
-            Title = primaryCliloc == -1 ? "Silence" : Language.GetCliloc(primaryCliloc);
-            Info = secondaryCliloc == -1 ? "Silence" : Language.ClilocFormat(secondaryCliloc, args).Replace("<br>", "\n").Trim();
+            if (primaryCliloc == -1)
+                Title = "Silence";
+            else if (primaryCliloc == -2)
+                Title = "Flames of Revenge";
+            else
+                Title = Language.GetCliloc(primaryCliloc);
+
+            if (secondaryCliloc == -1)
+                Info = "Silence";
+            else if (secondaryCliloc == -2)
+                Info = args;
+            else
+                Info = Language.ClilocFormat(secondaryCliloc, args).Replace("<br>", "\n").Trim();
+
             if (duration != 0)
                 end = DateTime.Now.AddSeconds(duration);
         }
@@ -212,6 +238,7 @@ namespace RazorEx
         Strength,
         Bless,
         ConsecrateWeapon,
-        Silence
+        Silence,
+        FlamesOfRevenge
     }
 }

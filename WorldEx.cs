@@ -42,6 +42,9 @@ namespace RazorEx
         public static Item FindItemG(ItemID itemID, ushort hue, Predicate<Item> predicate = null)
         { return FindItemsG(itemID, hue, predicate).FirstOrDefault(); }
 
+        public static Item FindItemG(Predicate<Item> predicate)
+        { return FindItemsG(predicate).FirstOrDefault(); }
+
         public static IEnumerable<Item> FindItemsG(ItemID itemID, Predicate<Item> predicate = null)
         { return FindItemsG(i => i.ItemID == itemID && (predicate == null || predicate(i))); }
 
