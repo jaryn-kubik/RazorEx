@@ -9,7 +9,7 @@ namespace RazorEx.Fixes
 
         private static bool IsInstrument(Item item)
         {
-            return item.ItemID == 0x2805 || item.ItemID == 0x2807 ||
+            return item.ItemID == 0x2805 || item.ItemID == 0x2807 || item.ItemID == 0x315C ||
                    (item.ItemID >= 0x0EB1 && item.ItemID <= 0x0EB4) ||
                    (item.ItemID >= 0x0E9C && item.ItemID <= 0x0E9E);
         }
