@@ -69,6 +69,7 @@ namespace RazorEx
                 flamesTimer.Stop();
                 RemoveBuff(BuffIcon.FlamesOfRevenge);
                 AddBuff(BuffIcon.FlamesOfRevenge, -2, -2, text.Substring(21, text.Length - 22), 90);
+                flamesTimer.Delay = TimeSpan.FromSeconds(90);
                 flamesTimer.Start();
             }
         }
