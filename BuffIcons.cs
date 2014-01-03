@@ -15,6 +15,7 @@ namespace RazorEx
         private static Dictionary<ushort, BuffIcon> gumpIDs;
         private static readonly Dictionary<BuffIcon, BuffInfo> buffs = new Dictionary<BuffIcon, BuffInfo>();
         private static readonly Timer consTimer = Timer.DelayedCallback(TimeSpan.FromSeconds(11), () => RemoveBuff(BuffIcon.ConsecrateWeapon));
+        private static readonly Timer flamesTimer = Timer.DelayedCallback(TimeSpan.FromSeconds(90), () => RemoveBuff(BuffIcon.FlamesOfRevenge));
 
         public static void OnInit()
         {
@@ -65,8 +66,10 @@ namespace RazorEx
             else if (serial == World.Player.Serial && mode == 2 && color == 0x0225 && font == 3 &&
                      lang == "ENU" && text.StartsWith("Flames of revenge"))
             {
+                flamesTimer.Stop();
                 RemoveBuff(BuffIcon.FlamesOfRevenge);
                 AddBuff(BuffIcon.FlamesOfRevenge, -2, -2, text.Substring(21, text.Length - 22), 90);
+                flamesTimer.Start();
             }
         }
 
