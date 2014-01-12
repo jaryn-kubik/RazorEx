@@ -153,7 +153,10 @@ namespace RazorEx.Addons
         private static bool IsShitResource(Item item)
         {
             if (ConfigEx.GetElement(true, "CleanerResources") &&
-                (Array.IndexOf(resources, item.ItemID) != -1 || (item.ItemID == 0x26B4 && item.Hue != 0x08B0 && item.Hue != 0x0A11) || (item.ItemID == 0x1BF2 && item.Hue != 0x0578)))
+                (Array.IndexOf(resources, item.ItemID) != -1 ||
+                (item.ItemID == 0x26B4 && item.Hue != 0x08B0 && item.Hue != 0x0A11) ||
+                (item.ItemID == 0x1BF2 && item.Hue != 0x0578) ||
+                (item.ItemID == 0x19B9 && item.Hue != 0x0A54)))
                 return true;
             if (ConfigEx.GetElement(true, "CleanerFood") &&
                 (IsFood(item.ItemID) && (item.ItemID != 0x09B9 || item.Hue != 0x09B7) && (item.ItemID != 0x09C1 || item.Hue != 0x0A3E)))
@@ -200,7 +203,7 @@ namespace RazorEx.Addons
         { return id != 0x097C && ((id >= 0x0976 && id <= 0x097E) || (id >= 0x09B5 && id <= 0x09C9) || (id >= 0x09D0 && id <= 0x09D3) || id == 0x09F1 || id == 0x09F2 || id == 0x0C66); }
 
         private static readonly ItemID[] petPlant = { 0x18EC, 0x18E5, 0x18DD };
-        private static readonly ItemID[] resources = { 0x19B9, 0x1BDD, 0x1BD7, 0x1BD4, 0x0F7E, 0x11EA, 0x26B7, 0x1079 };
+        private static readonly ItemID[] resources = { 0x1BDD, 0x1BD7, 0x1BD4, 0x0F7E, 0x11EA, 0x26B7, 0x1079 };
         private static readonly ItemID[] regs = { 0x0F78, 0x0F7A, 0x0F7B, 0x0F7D, 0x0F84, 0x0F85, 0x0F86, 0x0F88, 0x0F8A, 0x0F8C, 0x0F8D, 0x0F8E, 0x0F8F };
     }
 }

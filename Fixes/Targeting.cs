@@ -44,6 +44,9 @@ namespace RazorEx.Fixes
 
                     if (mobile.Body == 0x000E && mobile.Hue == 0x0000) // mental z krumpu
                         continue;
+
+                    if (mobile.Body == 0x008A && mobile.Hue == 0x4001) // ork z talismanu
+                        continue;
                 }
 
                 if (result == null || Utility.DistanceSqrt(World.Player.Position, mobile.Position) < Utility.DistanceSqrt(World.Player.Position, result.Position))
