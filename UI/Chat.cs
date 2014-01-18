@@ -94,7 +94,9 @@ namespace RazorEx.UI
         protected override void Dispose(bool disposing)
         {
             PacketHandler.RemoveServerToClientFilter(0xAE, OnSpeech);
+            PacketHandler.RemoveServerToClientFilter(0x1C, OnAsciiSpeech);
             PacketHandler.RemoveServerToClientViewer(0xBF, OnPartySpeech);
+
             instance = null;
             base.Dispose(disposing);
         }

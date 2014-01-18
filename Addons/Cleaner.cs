@@ -70,6 +70,8 @@ namespace RazorEx.Addons
             Clean(backpack.FindItem(0x0E79, 0x001A), bag.FindItems(0x0C64, 0x0490)); //zoogi vejce
             Clean(backpack.FindItem(0x0E79, 0x001A), bag.FindItems(0x09EC, 0x002C)); //medovina
             Clean(backpack.FindItem(0x0E79, 0x001A), bag.FindItems(0x2808, 0)); //smoke bomb
+            Clean(backpack.FindItem(0x0E79, 0x001A), bag.FindItems(0x0F0B, 0x0367)); //pet res
+            Clean(backpack.FindItem(0x0E79, 0x001A), bag.FindItems(0x0F0B, 0x0774)); //repair
             Clean(backpack.FindItem(0x2252, 0x08AC), bag.FindItems(0x0EF0, 0x0000)); //silver
             Item quiver = World.Player.GetItemOnLayer(Layer.MiddleTorso);
             if (quiver == null || (!quiver.IsQuiver() && !IsQuiverSash(quiver)))
@@ -82,10 +84,14 @@ namespace RazorEx.Addons
             Item whiteBall = backpack.FindItem(0x0E73, 0x0702, recurse: false);
             if (whiteBall != null)
                 Clean(backpack, bag.FindItems(0x0E73, 0x0702, i => i != whiteBall));
+            else
+                Clean(backpack.FindItem(0x0E79, 0x001A), bag.FindItems(0x0E73, 0x0702));
 
             Item brownBall = backpack.FindItem(0x0E73, 0x0629, recurse: false);
             if (brownBall != null)
                 Clean(backpack, bag.FindItems(0x0E73, 0x0629, i => i != brownBall));
+            else
+                Clean(backpack.FindItem(0x0E79, 0x001A), bag.FindItems(0x0E73, 0x0629));
 
             Clean(backpack.FindItem(0x0E79, 0x0488), bag.FindItems(i => Array.IndexOf(petPlant, i.ItemID) != -1)); //petplant
             Clean(backpack.FindItem(0x24D7, 0x0556), bag.FindItems(i => (IsFish(i.ItemID) && !IsBigFish(i)) || (i.ItemID == 0x0DCA && i.Hue == 0x08A0)));//fishbag + site
