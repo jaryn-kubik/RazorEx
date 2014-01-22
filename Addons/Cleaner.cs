@@ -1,4 +1,5 @@
-﻿using Assistant;
+﻿using System.Xml.Linq;
+using Assistant;
 using RazorEx.Fixes;
 using System;
 using System.Collections;
@@ -11,17 +12,19 @@ namespace RazorEx.Addons
     {
         public static void OnInit()
         {
+            CleanerAgent agent = new CleanerAgent();
+            Agent.Add(agent);
             Command.Register("clean", args => Clean());
             Command.Register("loot", args => Loot());
             Core.AddHotkey("Cleaner", Clean);
             Core.AddHotkey("Loot", Loot);
-            ConfigAgent.AddItem<uint>(0, "GPBag");
-            ConfigAgent.AddItem<byte>(28, "CleanerTalismans");
-            ConfigAgent.AddItem(true, "CleanerResources");
-            ConfigAgent.AddItem(true, "CleanerFood");
-            ConfigAgent.AddItem(true, "CleanerRunics");
-            ConfigAgent.AddItem(false, "CleanerSOS");
-            ConfigAgent.AddItem(false, "LootBigDiamonds");
+            agent.Add<uint>(0, "GPBag");
+            agent.Add<byte>(30, "CleanerTalismans");
+            agent.Add(true, "CleanerResources");
+            agent.Add(true, "CleanerFood");
+            agent.Add(true, "CleanerRunics");
+            agent.Add(false, "CleanerSOS");
+            agent.Add(false, "LootBigDiamonds");
         }
 
         public static void Clean() { Loot(World.Player.Backpack); }
@@ -170,7 +173,7 @@ namespace RazorEx.Addons
             if (ConfigEx.GetElement(true, "CleanerRunics") && IsShitRunic(item) == true)
                 return true;
 
-            byte min = ConfigEx.GetElement<byte>(28, "CleanerTalismans");
+            byte min = ConfigEx.GetElement<byte>(30, "CleanerTalismans");
             if (item.Hue != 0 || item.ItemID < 0x2F58 || item.ItemID > 0x2F5B || min == 0)
                 return false;
             foreach (ObjectPropertyList.OPLEntry prop in item.ObjPropList.m_Content)
@@ -211,5 +214,22 @@ namespace RazorEx.Addons
         private static readonly ItemID[] petPlant = { 0x18EC, 0x18E5, 0x18DD };
         private static readonly ItemID[] resources = { 0x1BDD, 0x1BD7, 0x1BD4, 0x0F7E, 0x11EA, 0x26B7, 0x1079 };
         private static readonly ItemID[] regs = { 0x0F78, 0x0F7A, 0x0F7B, 0x0F7D, 0x0F84, 0x0F85, 0x0F86, 0x0F88, 0x0F8A, 0x0F8C, 0x0F8D, 0x0F8E, 0x0F8F };
+    }
+
+    public class CleanerAgent : ConfigAgent
+    {
+        public override string Name { get { return "Cleaner"; } }
+        public void Add<T>(T defaultValue, params XName[] nodes) where T : IConvertible
+        { items.Add(new CleanerItem(defaultValue, null, nodes)); }
+
+        private class CleanerItem : ConfigItem
+        {
+            public CleanerItem(object defaultValue, Action<object> onChange, params XName[] nodes) : base(defaultValue, onChange, nodes) {}
+            public override string ToString()
+            {
+                string str = base.ToString();
+                return str.StartsWith("Cleaner") ? str.Substring(7) : str;
+            }
+        }
     }
 }

@@ -79,6 +79,7 @@
     <Compile Include="Addons\BackpackOrganizer.cs" />
     <Compile Include="Addons\Cleaner.cs" />
     <Compile Include="Addons\Evasion.cs" />
+    <Compile Include="Addons\SpectralScimitar.cs" />
     <Compile Include="Addons\MassMove.cs" />
     <Compile Include="DragDrop.cs" />
     <Compile Include="Fixes\AuberonKeys.cs" />

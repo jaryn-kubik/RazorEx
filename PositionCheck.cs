@@ -6,6 +6,8 @@ namespace RazorEx
 {
     public static class PositionCheck
     {
+        private static readonly Point2D heroticUL = new Point2D(5120, 400);
+        private static readonly Point2D heroticBR = new Point2D(5250, 511);
         private static readonly Point2D khaldunUL = new Point2D(5383, 1287);
         private static readonly Point2D khaldunBR = new Point2D(5624, 1505);
         private static readonly Point2D fireUL = new Point2D(5639, 1287);
@@ -15,6 +17,7 @@ namespace RazorEx
         private static readonly Point2D wispUL = new Point2D(624, 1423);
         private static readonly Point2D wispBR = new Point2D(1014, 1583);
 
+        public static bool InHerotic { get; private set; }
         public static bool InKhaldun { get; private set; }
         public static bool InFire { get; private set; }
         public static bool InPanda { get; private set; }
@@ -46,6 +49,12 @@ namespace RazorEx
 
             if (IsAuberon && World.Player.Map != 2)
                 IsAuberon = false;
+
+            bool isHerotic = World.Player.Position.InBounds(heroticUL, heroticBR) && World.Player.Map == 0;
+            if (isHerotic && !InHerotic)
+                enterHerotic();
+            else if (!isHerotic && InHerotic)
+                leaveHerotic();
 
             bool isKhaldun = World.Player.Position.InBounds(khaldunUL, khaldunBR) && World.Player.Map == 0;
             if (isKhaldun && !InKhaldun)
@@ -87,6 +96,20 @@ namespace RazorEx
         {
             add { leaveKhaldun += value; }
             remove { leaveKhaldun -= value; }
+        }
+
+        private static Action enterHerotic = () => InHerotic = true;
+        public static event Action EnterHerotic
+        {
+            add { enterHerotic += value; }
+            remove { enterHerotic -= value; }
+        }
+
+        private static Action leaveHerotic = () => InHerotic = false;
+        public static event Action LeaveHerotic
+        {
+            add { leaveHerotic += value; }
+            remove { leaveHerotic -= value; }
         }
     }
 }

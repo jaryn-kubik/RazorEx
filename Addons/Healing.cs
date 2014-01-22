@@ -41,6 +41,8 @@ namespace RazorEx.Addons
             Core.AddHotkey("Bandage Target", HealTarget);
             PositionCheck.EnterKhaldun += () => { if (enabled) OnCommand(null); };
             PositionCheck.LeaveKhaldun += () => { if (!enabled) OnCommand(null); };
+            PositionCheck.EnterHerotic += () => { if (enabled) OnCommand(null); };
+            PositionCheck.LeaveHerotic += () => { if (!enabled) OnCommand(null); };
         }
 
         private static void OnCommand(string[] args)

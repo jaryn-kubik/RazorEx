@@ -9,13 +9,14 @@ namespace RazorEx
 {
     public class ConfigAgent : Agent
     {
-        private static readonly List<ConfigItem> items = new List<ConfigItem>();
+        protected readonly List<ConfigItem> items = new List<ConfigItem>();
         private ListBox listBox;
         public override string Name { get { return "Config"; } }
 
-        public static void OnInit() { Add(new ConfigAgent()); }
-        public static void AddItem<T>(T defaultValue, params XName[] nodes) where T : IConvertible { items.Add(new ConfigItem(defaultValue, null, nodes)); }
-        public static void AddItem<T>(T defaultValue, Action<T> onChange, params XName[] nodes) where T : IConvertible { items.Add(new ConfigItem(defaultValue, value => onChange((T)value), nodes)); }
+        private static readonly ConfigAgent instance = new ConfigAgent();
+        public static void OnInit() { Add(instance); }
+        public static void AddItem<T>(T defaultValue, params XName[] nodes) where T : IConvertible { instance.items.Add(new ConfigItem(defaultValue, null, nodes)); }
+        public static void AddItem<T>(T defaultValue, Action<T> onChange, params XName[] nodes) where T : IConvertible { instance.items.Add(new ConfigItem(defaultValue, value => onChange((T)value), nodes)); }
 
         public override void Save(XmlTextWriter xml) { }
         public override void Load(XmlElement node) { }
@@ -73,7 +74,7 @@ namespace RazorEx
             listBox.Items[listBox.SelectedIndex] = item;
         }
 
-        private class ConfigItem
+        protected class ConfigItem
         {
             private readonly XName[] nodes;
             private readonly object defaultValue;
