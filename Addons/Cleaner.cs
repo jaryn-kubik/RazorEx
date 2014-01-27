@@ -165,7 +165,7 @@ namespace RazorEx.Addons
                 (Array.IndexOf(resources, item.ItemID) != -1 ||
                 (item.ItemID == 0x26B4 && item.Hue != 0x08B0 && item.Hue != 0x0A11) ||
                 (item.ItemID == 0x1BF2 && item.Hue != 0x0578) ||
-                (item.ItemID == 0x19B9 && item.Hue != 0x0A54)))
+                (item.ItemID == 0x19B9 && item.Hue != 0x0A54 && item.Hue != 0x047E)))//chromit a honor
                 return true;
             if (ConfigEx.GetElement(true, "CleanerFood") &&
                 (IsFood(item.ItemID) && (item.ItemID != 0x09B9 || item.Hue != 0x09B7) && (item.ItemID != 0x09C1 || item.Hue != 0x0A3E)))
