@@ -64,7 +64,7 @@ namespace RazorEx
                 lang == "ENU" && name == "System" && text == "Silence faded")
                 RemoveBuff(BuffIcon.Silence);
             else if (serial == World.Player.Serial && mode == 2 && color == 0x0225 && font == 3 &&
-                     lang == "ENU" && text.StartsWith("Flames of revenge"))
+                     lang == "ENU" && text.Trim().StartsWith("Flames of revenge"))
             {
                 flamesTimer.Stop();
                 RemoveBuff(BuffIcon.FlamesOfRevenge);

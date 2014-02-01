@@ -14,7 +14,7 @@ namespace RazorEx.Fixes
         {
             bool enabled = !ConfigEx.GetElement(false, "BlockFriendlyFire");
             ConfigEx.SetElement(enabled, "BlockFriendlyFire");
-            WorldEx.SendMessage("Friendly fire " + (enabled ? "disabled." : "enabled."));
+            WorldEx.SendMessage("Friendly fire " + (enabled ? "blocked." : "allowed."));
             OnChange(enabled);
         }
 

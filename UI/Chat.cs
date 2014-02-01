@@ -68,12 +68,24 @@ namespace RazorEx.UI
             string name = p.ReadStringSafe(30);
             string text = p.ReadUnicodeStringSafe();
 
+            if ((type == 0 && color == 0x34 && text == "zZz") ||
+                (type == 2 && color == 0x225 && text.StartsWith("*is AFK (") && text.EndsWith(")*")))
+                return;
+
             if (type == 0x0D)
                 textBox.AddLine(string.Format("[G] {0}: {1}", name, text), guildColor);
             else if (type != 0x0A && color != 0x03B2)
             {
                 if (name == "System")
+                {
+                    text = text.Trim();
+                    if ((text.StartsWith("Z herbare bylo vyjmuto") ||
+                        (text.StartsWith("Kolik") && text.EndsWith("chces vybrat?")) ||
+                        text.EndsWith("bylo vlozeno do herbare.")) &&
+                        color == 0x55C)
+                        return;
                     textBox.AddLine(string.Format("[¤] {0}", text), Hues.GetHue(color).GetColor(30));
+                }
                 else if (lang != "ENU")
                     textBox.AddLine(string.Format("{0}: {1}", name, text), Hues.GetHue(color).GetColor(30));
             }

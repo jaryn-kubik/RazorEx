@@ -83,6 +83,7 @@
     <Compile Include="Addons\MassMove.cs" />
     <Compile Include="DragDrop.cs" />
     <Compile Include="Fixes\AuberonKeys.cs" />
+    <Compile Include="Fixes\GuildParty.cs" />
     <Compile Include="Skills\Fishing.cs" />
     <Compile Include="Addons\PotionStack.cs" />
     <Compile Include="Addons\WeaponMoves.cs" />

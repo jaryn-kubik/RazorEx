@@ -48,6 +48,13 @@ namespace RazorEx
                     if (mi != null)
                         mi.Invoke(null, null);
                 }
+
+                foreach (Type type in typeof(Core).Assembly.GetExportedTypes())
+                {
+                    MethodInfo mi = type.GetMethod("AfterInit", BindingFlags.Public | BindingFlags.Static);
+                    if (mi != null)
+                        mi.Invoke(null, null);
+                }
                 Config.CurrentProfile.Load();
 
                 ClientCommunication.LaunchClient(StartInfo.ClientPath);

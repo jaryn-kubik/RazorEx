@@ -16,6 +16,7 @@ namespace RazorEx.Addons
             list.Clear();
             list.Add(new PacketFilterCallback(OnLocalizedMessage));
             ConfigAgent.AddItem(false, value => enabled = value, "Filter");
+            ConfigAgent.AddItem(false, OnChanged, "FilterHerbar");
             Command.Register("filter", OnCommand);
 
             List<int> msgs = new List<int>();
@@ -32,6 +33,31 @@ namespace RazorEx.Addons
         {
             ConfigEx.SetElement(enabled = !enabled, "Filter");
             WorldEx.SendMessage("Filter " + (enabled ? "enabled." : "disabled."));
+        }
+
+        private static void OnChanged(bool value)
+        {
+            if (value)
+                PacketHandler.RegisterServerToClientFilter(0xAE, OnSpeech);
+            else
+                PacketHandler.RemoveServerToClientFilter(0xAE, OnSpeech);
+        }
+
+        private static void OnSpeech(Packet p, PacketHandlerEventArgs args)
+        {
+            p.MoveToData();
+            Serial serial = p.ReadUInt32();
+            ItemID itemID = p.ReadUInt16();
+            p.ReadByte();
+            ushort color = p.ReadUInt16();
+            p.ReadUInt16();
+            p.ReadStringSafe(4);
+            p.ReadStringSafe(30);
+            string text = p.ReadUnicodeStringSafe().Trim();
+
+            if (serial == Serial.MinusOne && itemID == 0xFFFF && color == 0x55C &&
+                text.EndsWith("bylo vlozeno do herbare."))
+                args.Block = true;
         }
 
         private static void OnLocalizedMessage(Packet p, PacketHandlerEventArgs args)

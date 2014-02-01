@@ -6,13 +6,9 @@ namespace RazorEx.Fixes
 {
     public static class Dressing
     {
-        //private static readonly ConcurrentDictionary<Item, bool> actions = new ConcurrentDictionary<Item, bool>();
-
         public static void OnInit()
         {
             DressList.OnAdd = DressList_OnAdd;
-            //PacketHandler.RemoveServerToClientViewer(0x27, (PacketViewerCallback)Delegate.CreateDelegate(typeof(PacketViewerCallback), typeof(PacketHandlers), "LiftReject"));
-            // PacketHandler.RegisterServerToClientViewer(0x27, LiftReject);
 
             Command.Register("dress", args => Dress());
             Core.AddHotkey("Dress", Dress);
@@ -40,24 +36,8 @@ namespace RazorEx.Fixes
                 Dress(selectedItem);
         }
 
-        /* private static void LiftReject(PacketReader p, PacketHandlerEventArgs args)
-         {
-             Item item = World.FindItem(DragDropManager.m_Holding);
-             if (!DragDropManager.LiftReject())
-             {
-                 args.Block = true;
-                 bool dress;
-                 if (item != null && actions.TryGetValue(item, out dress))
-                     if (dress)
-                         DragDropManager.DragDrop(item, World.Player, GetLayer(item));
-                     else
-                         DragDropManager.DragDrop(item, FindBag(item));
-             }
-         }*/
-
         private static void Dress(DressList list)
         {
-            //actions.Clear();
             if (list.Name.StartsWith("_"))
                 foreach (DressList dressList in DressList.m_List)
                     if (dressList.Name == "base")
@@ -69,7 +49,6 @@ namespace RazorEx.Fixes
 
         private static void Dress(Serial serial)
         {
-            //actions.Clear();
             DressInternal(serial);
         }
 
@@ -105,13 +84,11 @@ namespace RazorEx.Fixes
 
         private static void Undress(Item item)
         {
-            //if (actions.TryAdd(item, false))
             DragDrop.Move(item, FindBag(item));
         }
 
         private static void Dress(Item item)
         {
-            //if (actions.TryAdd(item, true))
             DragDrop.Dress(item, GetLayer(item));
         }
 

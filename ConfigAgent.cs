@@ -27,6 +27,7 @@ namespace RazorEx
             buttons[0].Visible = true;
             listBox = subList;
             subList.BeginUpdate();
+            subList.Sorted = true;
             subList.Items.Clear();
             foreach (ConfigItem item in items)
                 subList.Items.Add(item);
