@@ -65,10 +65,12 @@ namespace RazorEx
             }
             else if (item.Value.GetType().IsEnum)
             {
-                int value = ((int)item.Value) + 1;
-                if (Enum.GetValues(item.Value.GetType()).Length <= value)
-                    value = 0;
-                item.Value = Enum.ToObject(item.Value.GetType(), value);
+                Type type = item.Value.GetType();
+                int value = (int)item.Value;
+                while (!Enum.IsDefined(type, ++value))
+                    if (value >= Enum.GetValues(type).Length)
+                        value = -1;
+                item.Value = Enum.ToObject(type, value);
             }
             else
                 throw new NotImplementedException();

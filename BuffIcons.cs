@@ -16,6 +16,7 @@ namespace RazorEx
         private static readonly Dictionary<BuffIcon, BuffInfo> buffs = new Dictionary<BuffIcon, BuffInfo>();
         private static readonly Timer consTimer = Timer.DelayedCallback(TimeSpan.FromSeconds(11), () => RemoveBuff(BuffIcon.ConsecrateWeapon));
         private static readonly Timer flamesTimer = Timer.DelayedCallback(TimeSpan.FromSeconds(90), () => RemoveBuff(BuffIcon.FlamesOfRevenge));
+        private static readonly Timer hammerTimer = Timer.DelayedCallback(TimeSpan.FromSeconds(60), () => RemoveBuff(BuffIcon.BlessedHammer));
 
         public static void OnInit()
         {
@@ -37,15 +38,26 @@ namespace RazorEx
 
         private static void OnASCIIMessage(PacketReader p, PacketHandlerEventArgs args)
         {
-            p.Seek(6, SeekOrigin.Current);
-            if (p.ReadByte() == 0 && p.ReadUInt16() == 0x00C1 && p.ReadUInt16() == 3)
+            Serial serial = p.ReadUInt32();
+            p.ReadUInt16();
+            byte type = p.ReadByte();
+            ushort hue = p.ReadUInt16();
+            ushort font = p.ReadUInt16();
+            if (type != 0 || font != 3)
+                return;
+            p.Seek(30, SeekOrigin.Current);
+            string str = p.ReadStringSafe().Trim();
+            if (hue == 0x00C1 && str == "Silence on " + World.Player.Name + "!")
             {
-                p.Seek(30, SeekOrigin.Current);
-                if (p.ReadStringSafe() == "Silence on " + World.Player.Name + "!")
-                {
-                    RemoveBuff(BuffIcon.Silence);
-                    AddBuff(BuffIcon.Silence, -1, -1, string.Empty, 30);
-                }
+                RemoveBuff(BuffIcon.Silence);
+                AddBuff(BuffIcon.Silence, -1, -1, string.Empty, 30);
+            }
+            else if (serial == World.Player.Serial && hue == 0x03B2 && str == "Blessed Hammer")
+            {
+                hammerTimer.Stop();
+                RemoveBuff(BuffIcon.BlessedHammer);
+                AddBuff(BuffIcon.BlessedHammer, -3, -3, string.Empty, 60);
+                hammerTimer.Start();
             }
         }
 
@@ -64,7 +76,7 @@ namespace RazorEx
                 lang == "ENU" && name == "System" && text == "Silence faded")
                 RemoveBuff(BuffIcon.Silence);
             else if (serial == World.Player.Serial && mode == 2 && color == 0x0225 && font == 3 &&
-                     lang == "ENU" && text.Trim().StartsWith("Flames of revenge"))
+                     lang == "ENU" && text.Trim().StartsWith("Flames of revenge", StringComparison.InvariantCultureIgnoreCase))
             {
                 flamesTimer.Stop();
                 RemoveBuff(BuffIcon.FlamesOfRevenge);
@@ -178,6 +190,8 @@ namespace RazorEx
                 Title = "Silence";
             else if (primaryCliloc == -2)
                 Title = "Flames of Revenge";
+            else if (primaryCliloc == -3)
+                Title = "Blessed Hammer";
             else
                 Title = Language.GetCliloc(primaryCliloc);
 
@@ -185,6 +199,8 @@ namespace RazorEx
                 Info = "Silence";
             else if (secondaryCliloc == -2)
                 Info = args;
+            else if (secondaryCliloc == -3)
+                Title = "Blessed Hammer";
             else
                 Info = Language.ClilocFormat(secondaryCliloc, args).Replace("<br>", "\n").Trim();
 
@@ -243,6 +259,7 @@ namespace RazorEx
         Bless,
         ConsecrateWeapon,
         Silence,
-        FlamesOfRevenge
+        FlamesOfRevenge,
+        BlessedHammer
     }
 }

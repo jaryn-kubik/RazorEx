@@ -48,4 +48,5 @@
   <ConsecrateWeapon>0x2C10</ConsecrateWeapon>
   <Silence>0xFFFF</Silence>
   <FlamesOfRevenge>0x09AA</FlamesOfRevenge>
+  <BlessedHammer>0x1F4C</BlessedHammer>
 </BuffIcons>
