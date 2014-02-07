@@ -14,7 +14,7 @@ namespace RazorEx.UI
         private SkillIcon(SkillName skill)
         {
             this.skill = skill;
-            table.Controls.Add(new LabelEx(skill.ToString()));
+            table.Controls.Add(new LabelEx(skill.ToString(), ConfigEx.GetElement(8, "SkillIconSize")));
             Location = new Point(ConfigEx.GetAttribute(Location.X, "locX", "Skills", skill.ToString()),
                                  ConfigEx.GetAttribute(Location.Y, "locY", "Skills", skill.ToString()));
         }
@@ -62,6 +62,7 @@ namespace RazorEx.UI
         {
             MainFormEx.Connected += MainFormEx_Connected;
             Command.Register("skill", OnCommand);
+            ConfigAgent.AddItem<byte>(8, "SkillIconSize");
         }
 
         private static void MainFormEx_Connected()

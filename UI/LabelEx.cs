@@ -10,12 +10,13 @@ namespace RazorEx.UI
             Text = text;
             Anchor = anchor;
             Size = TextRenderer.MeasureText(Text, Font);
-            Font = new Font(Font.FontFamily, size, style);
+            FontSize = size;
             Margin = new Padding(margin);
             Enabled = false;
             ForeColor = Color.DeepPink;
         }
 
+        public float FontSize { set { Font = new Font(Font.FontFamily, value, Font.Style); } }
         public override string Text
         {
             get { return base.Text; }

@@ -111,8 +111,6 @@ namespace RazorEx
             {
                 if (defaultValue is uint)
                     return string.Format("{0}: 0x{1:X}", nodes[nodes.Length - 1], Value);
-                if (defaultValue is byte)
-                    return string.Format("{0}: {1}%", nodes[nodes.Length - 1], Value);
                 return string.Format("{0}: {1}", nodes[nodes.Length - 1], Value);
             }
         }

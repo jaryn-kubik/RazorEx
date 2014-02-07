@@ -185,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.manifest" />
+    <EmbeddedResource Include="treasure.cfg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
