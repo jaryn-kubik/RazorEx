@@ -74,7 +74,6 @@ namespace RazorEx.Addons
             Clean(backpack.FindItem(0x0E3B, 0x0489), bag.FindItems(0x0E76, i => i.Contains.Count == 0 && !i.IsBlessed())); //empty bags
             Clean(backpack.FindItem(0x0E79, 0x001A), bag.FindItems(0x0F0E, 0x0000)); //empty bottles
             Clean(backpack.FindItem(0x0E79, 0x001A), bag.FindItems(0x0C64, 0x0490)); //zoogi vejce
-            Clean(backpack.FindItem(0x0E79, 0x001A), bag.FindItems(0x09EC, 0x002C)); //medovina
             Clean(backpack.FindItem(0x0E79, 0x001A), bag.FindItems(0x2808, 0)); //smoke bomb
             Clean(backpack.FindItem(0x0E79, 0x001A), bag.FindItems(0x0F0B, 0x0367)); //pet res
             Clean(backpack.FindItem(0x0E79, 0x001A), bag.FindItems(0x0F0B, 0x0774)); //repair

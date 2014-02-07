@@ -48,7 +48,7 @@ namespace RazorEx.Fixes
                 x += (ushort)(p.ReadUInt16() * 2);
                 y += (ushort)(p.ReadUInt16() * 2);
                 Point2D map = new Point2D(x, y);
-                int index = positions.FindIndex(pos => Utility.InRange(pos, map, 10));
+                int index = positions.FindIndex(pos => Utility.InRange(pos, map, 10)) + 1;
                 WorldEx.SendMessage(string.Format("Map opened to {0}, {1}. ({2})", x, y, index));
                 WorldEx.SendToClient(new QuestArrow(true, x, y));
             }
