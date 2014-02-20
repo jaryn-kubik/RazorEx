@@ -115,12 +115,13 @@ namespace RazorEx.Addons
             }
         }
 
-        private static void Event_LocalizedMessage(Serial serial, int msg, string args)
+        private static bool? Event_LocalizedMessage(Serial serial, ItemID graphic, byte type, ushort hue, ushort font, int num, string name, string args)
         {
-            if (msg == 1060181) // You need ~1~ mana to perform that attack
+            if (num == 1060181) // You need ~1~ mana to perform that attack
                 manaReq = int.Parse(args.Trim());
-            else if (Array.IndexOf(msgs, msg) != -1)
+            else if (Array.IndexOf(msgs, num) != -1)
                 Current = MoveType.None;
+            return null;
         }
 
         private static void Event_MobileUpdated(Serial serial)

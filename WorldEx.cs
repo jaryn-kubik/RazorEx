@@ -76,14 +76,15 @@ namespace RazorEx
         public static void SendToClient(Packet packet, bool processHandlers = false)
         {
             if (processHandlers)
-                PacketHandler.OnServerPacket(packet.PacketID, null, packet);
+                PacketHandler.OnServerPacket(packet.PacketID, new PacketReader(packet.Compile(), packet.m_DynSize), packet);
             ClientCommunication.SendToClient(packet);
         }
 
         public static void SendToServer(Packet packet, bool processHandlers = false)
         {
+
             if (processHandlers)
-                PacketHandler.OnClientPacket(packet.PacketID, null, packet);
+                PacketHandler.OnClientPacket(packet.PacketID, new PacketReader(packet.Compile(), packet.m_DynSize), packet);
             ClientCommunication.SendToServer(packet);
         }
 

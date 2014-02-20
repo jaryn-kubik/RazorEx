@@ -13,18 +13,17 @@ namespace RazorEx.Addons
 
         private static readonly BanishTimer timer = new BanishTimer();
 
-        public static void OnInit() { PacketHandler.RegisterServerToClientViewer(0x1C, OnAsciiMessage); }
-        private static void OnAsciiMessage(PacketReader p, PacketHandlerEventArgs args)
+        public static void OnInit() { Event.ASCIIMessage += Event_ASCIIMessage; }
+        private static bool? Event_ASCIIMessage(Serial serial, ItemID graphic, byte type, ushort hue, ushort font, string lang, string name, string msg)
         {
-            p.Position = 0x2C;
-            string message = p.ReadStringSafe();
-            if (message == "Banish!" || message == "Decimate!" || message == "Pool of Poison!")
+            if (msg == "Banish!" || msg == "Decimate!" || msg == "Pool of Poison!")
             {
-                message = string.Format("!!!{0}!!", message);
-                WorldEx.OverHeadMessage(message, 0x0017);
-                if (message == "!!!Banish!!!")
+                msg = string.Format("!!!{0}!!", msg);
+                WorldEx.OverHeadMessage(msg, 0x0017);
+                if (msg == "!!!Banish!!!")
                     timer.Start();
             }
+            return null;
         }
     }
 }

@@ -82,6 +82,9 @@
     <Compile Include="Addons\SpectralScimitar.cs" />
     <Compile Include="Addons\MassMove.cs" />
     <Compile Include="DragDrop.cs" />
+    <Compile Include="Event.Messages.cs">
+      <DependentUpon>Event.cs</DependentUpon>
+    </Compile>
     <Compile Include="Fixes\AuberonKeys.cs" />
     <Compile Include="Fixes\GuildParty.cs" />
     <Compile Include="Fixes\RuneBook.cs" />
@@ -186,6 +189,12 @@
   <ItemGroup>
     <None Include="app.manifest" />
     <EmbeddedResource Include="treasure.cfg" />
+    <Compile Include="Event.Mobiles.cs">
+      <DependentUpon>Event.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Event.Others.cs">
+      <DependentUpon>Event.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

@@ -42,13 +42,14 @@ namespace RazorEx.UI
             }
         }
 
-        private void Event_LocalizedMessage(Serial serial, int msg, string args)
+        private bool? Event_LocalizedMessage(Serial serial, ItemID graphic, byte type, ushort hue, ushort font, int num, string name, string args)
         {
-            if (InUse && Array.IndexOf(msgs, msg) != -1)
+            if (InUse && Array.IndexOf(msgs, num) != -1)
             {
                 gump.Set((ushort)GetID(), 0x0017);
                 Assistant.Timer.DelayedCallback(TimeSpan.FromMilliseconds(100), SetGump).Start();
             }
+            return null;
         }
 
         private void SetGump()

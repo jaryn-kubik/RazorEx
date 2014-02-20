@@ -15,23 +15,23 @@ namespace RazorEx.Addons
         {
             if (enabled)
             {
-                PacketHandler.RegisterServerToClientViewer(0xC0, OnEffect);
+                Event.HuedEffect += Event_HuedEffect;
                 BuffIcons.Added += BuffIcons_Added;
                 BuffIcons.Removed += BuffIcons_Removed;
             }
             else
             {
-                PacketHandler.RemoveServerToClientViewer(0xC0, OnEffect);
+                Event.HuedEffect -= Event_HuedEffect;
                 BuffIcons.Added -= BuffIcons_Added;
                 BuffIcons.Removed -= BuffIcons_Removed;
             }
         }
 
-        private static void OnEffect(PacketReader p, PacketHandlerEventArgs args)
+        private static bool? Event_HuedEffect(byte type, Serial src, Serial dest, ItemID itemID, byte speed, byte count, uint hue, uint mode)
         {
-            uint serial;
-            if (p.ReadByte() == 3 && (serial = p.ReadUInt32()) != World.Player.Serial && p.ReadInt32() == 0 && p.ReadInt16() == 0x375A)
-                lastSerial = serial;
+            if (type == 3 && src != World.Player.Serial && dest == 0 && itemID == 0x375A)
+                lastSerial = src;
+            return null;
         }
 
         private static void BuffIcons_Added(BuffIcon buffId, BuffInfo info)

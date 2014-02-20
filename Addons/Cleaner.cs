@@ -57,6 +57,8 @@ namespace RazorEx.Addons
                 Clean(backpack, bag.FindItems(0x0EF0, 0x09F0));//cechy
                 Clean(backpack, bag.FindItems(0x097C, 0x09E2));//fragmenty
                 Clean(backpack, bag.FindItems(0x26B4, 0x0A11));//charmy
+                Clean(backpack, bag.FindItems(0x09EC, 0x0265));//lestidlo 1
+                Clean(backpack, bag.FindItems(0x09EC, 0x0247));//lestidlo 2
                 Clean(backpack, bag.FindItems(0x1877, i => i.Hue != 0));//draty
                 Clean(backpack, bag.FindItems(0x1F3D, i => i.Hue != 0));//svitky
                 Clean(backpack, bag.FindItems(IsLevel));
@@ -98,11 +100,11 @@ namespace RazorEx.Addons
             else
                 Clean(backpack.FindItem(0x0E79, 0x001A), bag.FindItems(0x0E73, 0x0629));
 
-            Item medovina = backpack.FindItem(0x09EC, 0x001A, recurse: false);
+            Item medovina = backpack.FindItem(0x09EC, 0x002C, recurse: false);
             if (medovina != null)
-                Clean(backpack, bag.FindItems(0x09EC, 0x001A, i => i != medovina));
+                Clean(backpack, bag.FindItems(0x09EC, 0x002C, i => i != medovina));
             else
-                Clean(backpack.FindItem(0x0E79, 0x001A), bag.FindItems(0x09EC, 0x001A));
+                Clean(backpack.FindItem(0x0E79, 0x001A), bag.FindItems(0x09EC, 0x002C));
 
             Clean(backpack.FindItem(0x0E79, 0x0488), bag.FindItems(i => Array.IndexOf(petPlant, i.ItemID) != -1)); //petplant
             Clean(backpack.FindItem(0x24D7, 0x0556), bag.FindItems(i => (IsFish(i.ItemID) && !IsBigFish(i)) || (i.ItemID == 0x0DCA && i.Hue == 0x08A0)));//fishbag + site

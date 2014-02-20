@@ -1,10 +1,9 @@
 ﻿using Assistant;
 using System;
-using System.IO;
 
 namespace RazorEx
 {
-    public static class Event
+    public static partial class Event
     {
         public static void OnInit()
         {
@@ -16,58 +15,15 @@ namespace RazorEx
             PacketHandler.RegisterServerToClientViewer(0x17, OnMobileUpdate1); // NewMobileStatus
             PacketHandler.RegisterServerToClientFilter(0x77, OnMobileUpdate2); // MobileMoving
             PacketHandler.RegisterServerToClientFilter(0x20, OnMobileUpdate2); // MobileUpdate
-            PacketHandler.RegisterServerToClientViewer(0xC1, OnLocalizedMessage);
-            PacketHandler.RegisterServerToClientViewer(0xCC, OnLocalizedMessage2);
             PacketHandler.RegisterServerToClientViewer(0x1D, OnRemoveObject);
             PacketHandler.RegisterServerToClientViewer(0x22, OnMove);
-        }
 
-        private static void OnMobileUpdate1(PacketReader p, PacketHandlerEventArgs args) { OnMobileUpdate(p.ReadUInt32()); }
-        private static void OnMobileUpdate2(Packet p, PacketHandlerEventArgs args) { OnMobileUpdate(p.ReadUInt32()); }
-        private static void OnMobileUpdate(uint serial)
-        {
-            if (mobileUpdated != null)
-                mobileUpdated(serial);
-        }
+            PacketHandler.RegisterServerToClientViewer(0x1C, OnASCIIMessage);
+            PacketHandler.RegisterServerToClientViewer(0xAE, OnUnicodeMessage);
+            PacketHandler.RegisterServerToClientViewer(0xC1, OnLocalizedMessage);
+            PacketHandler.RegisterServerToClientViewer(0xCC, OnMessageLocalizedAffix);
 
-        private static Action<Serial> mobileUpdated;
-        public static event Action<Serial> MobileUpdated
-        {
-            add { mobileUpdated += value; }
-            remove { mobileUpdated -= value; }
-        }
-
-        private static void OnLocalizedMessage(PacketReader p, PacketHandlerEventArgs args)
-        {
-            Serial serial = p.ReadUInt32();
-            p.Seek(14, SeekOrigin.Begin);
-            int num = p.ReadInt32();
-            p.Seek(30, SeekOrigin.Current);
-            if (localizedMessage != null)
-                localizedMessage(serial, num, p.ReadUnicodeStringBE(((p.Length - 1) - p.Position) / 2));
-        }
-
-        private static void OnLocalizedMessage2(PacketReader p, PacketHandlerEventArgs args)
-        {
-            Serial serial = p.ReadUInt32();
-            p.Seek(14, SeekOrigin.Begin);
-            int num = p.ReadInt32();
-            p.Seek(30, SeekOrigin.Current);
-            if (localizedMessage != null)
-                localizedMessage(serial, num, string.Empty);
-        }
-
-        private static Action<Serial, int, string> localizedMessage;
-        public static event Action<Serial, int, string> LocalizedMessage
-        {
-            add { localizedMessage += value; }
-            remove { localizedMessage -= value; }
-        }
-
-        private static void OnRemoveObject(PacketReader p, PacketHandlerEventArgs args)
-        {
-            if (removeObject != null)
-                removeObject(p.ReadUInt32());
+            PacketHandler.RegisterServerToClientViewer(0xC0, OnHuedEffect);
         }
 
         private static Action<Serial> removeObject;
@@ -77,17 +33,10 @@ namespace RazorEx
             remove { removeObject -= value; }
         }
 
-        private static void OnMove(PacketReader p, PacketHandlerEventArgs args)
+        private static void OnRemoveObject(PacketReader p, PacketHandlerEventArgs args)
         {
-            if (playerMoved != null)
-                playerMoved();
-        }
-
-        private static Action playerMoved;
-        public static event Action PlayerMoved
-        {
-            add { playerMoved += value; }
-            remove { playerMoved -= value; }
+            if (removeObject != null)
+                removeObject(p.ReadUInt32());
         }
     }
 }

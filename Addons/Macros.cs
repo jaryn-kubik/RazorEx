@@ -16,10 +16,11 @@ namespace RazorEx.Addons
 
         public SpellTarget() { m_Timeout = TimeSpan.FromSeconds(2); }
         public static void OnInit() { Event.LocalizedMessage += Event_LocalizedMessage; }
-        private static void Event_LocalizedMessage(Serial serial, int msg, string args)
+        private static bool? Event_LocalizedMessage(Serial serial, ItemID graphic, byte type, ushort hue, ushort font, int num, string name, string args)
         {
-            if (msg == 500641)
+            if (num == 500641)
                 disturbed = true;
+            return null;
         }
 
         public override bool CheckMatch(MacroAction a)
@@ -72,13 +73,14 @@ namespace RazorEx.Addons
 
         public override bool PerformWait() { return !Recieved; }
         public override bool Perform() { return !PerformWait(); }
-        private void Event_LocalizedMessage(Serial arg1, int arg2, string arg3)
+        private bool? Event_LocalizedMessage(Serial serial, ItemID graphic, byte type, ushort hue, ushort font, int num, string name, string args)
         {
-            if (Array.IndexOf(msgs, arg2) != -1)
+            if (Array.IndexOf(msgs, num) != -1)
             {
-                Last = arg2;
+                Last = num;
                 Recieved = true;
             }
+            return null;
         }
     }
 

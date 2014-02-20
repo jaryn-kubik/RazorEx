@@ -37,7 +37,7 @@ namespace RazorEx
             }
         }
 
-        private static void Event_LocalizedMessage(Serial serial, int num, string args)
+        private static bool? Event_LocalizedMessage(Serial serial, ItemID graphic, byte type, ushort hue, ushort font, int num, string name, string args)
         {
             switch (num)
             {
@@ -48,7 +48,7 @@ namespace RazorEx
                         if (start != null)
                             start();
                     }
-                    return;
+                    return null;
                 case 1063254: // You have Achieved Perfection in inflicting damage to this opponent!
                     Perfection = 100;
                     break;
@@ -68,12 +68,13 @@ namespace RazorEx
                     Perfection = 0;
                     if (end != null)
                         end();
-                    return;
+                    return null;
                 default:
-                    return;
+                    return null;
             }
             if (change != null)
                 change();
+            return null;
         }
 
         private static Action start;

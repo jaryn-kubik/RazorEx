@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Assistant;
 
 namespace RazorEx.Fixes
@@ -48,8 +49,9 @@ namespace RazorEx.Fixes
                 x += (ushort)(p.ReadUInt16() * 2);
                 y += (ushort)(p.ReadUInt16() * 2);
                 Point2D map = new Point2D(x, y);
-                int index = positions.FindIndex(pos => Utility.InRange(pos, map, 10)) + 1;
-                WorldEx.SendMessage(string.Format("Map opened to {0}, {1}. ({2})", x, y, index));
+                Point2D closest = positions.Aggregate((min, next) =>
+                    Utility.Distance(map, min) < Utility.Distance(map, next) ? min : next);
+                WorldEx.SendMessage(string.Format("Map opened to {0}, {1}. ({2})", x, y, positions.IndexOf(closest) + 1));
                 WorldEx.SendToClient(new QuestArrow(true, x, y));
             }
         }

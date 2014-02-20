@@ -38,26 +38,17 @@ namespace RazorEx.Addons
         private static void OnChanged(bool value)
         {
             if (value)
-                PacketHandler.RegisterServerToClientFilter(0xAE, OnSpeech);
+                Event.UnicodeMessage += Event_UnicodeMessage;
             else
-                PacketHandler.RemoveServerToClientFilter(0xAE, OnSpeech);
+                Event.UnicodeMessage -= Event_UnicodeMessage;
         }
 
-        private static void OnSpeech(Packet p, PacketHandlerEventArgs args)
+        private static bool? Event_UnicodeMessage(Serial serial, ItemID graphic, byte type, ushort hue, ushort font, string lang, string name, string msg)
         {
-            p.MoveToData();
-            Serial serial = p.ReadUInt32();
-            ItemID itemID = p.ReadUInt16();
-            p.ReadByte();
-            ushort color = p.ReadUInt16();
-            p.ReadUInt16();
-            p.ReadStringSafe(4);
-            p.ReadStringSafe(30);
-            string text = p.ReadUnicodeStringSafe().Trim();
-
-            if (serial == Serial.MinusOne && itemID == 0xFFFF && color == 0x55C &&
-                text.EndsWith("bylo vlozeno do herbare."))
-                args.Block = true;
+            if (serial == Serial.MinusOne && graphic == 0xFFFF && hue == 0x55C &&
+                msg.EndsWith("bylo vlozeno do herbare."))
+                return true;
+            return null;
         }
 
         private static void OnLocalizedMessage(Packet p, PacketHandlerEventArgs args)

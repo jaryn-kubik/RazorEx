@@ -16,12 +16,17 @@ namespace RazorEx
         private static readonly Point2D pandaBR = new Point2D(5624, 504);
         private static readonly Point2D wispUL = new Point2D(624, 1423);
         private static readonly Point2D wispBR = new Point2D(1014, 1583);
+        private static readonly Point2D mages1UL = new Point2D(5127, 1287);
+        private static readonly Point2D mages1BR = new Point2D(5224, 1384);
+        private static readonly Point2D mages2UL = new Point2D(5671, 790);
+        private static readonly Point2D mages2BR = new Point2D(5867, 1010);
 
         public static bool InHerotic { get; private set; }
         public static bool InKhaldun { get; private set; }
         public static bool InFire { get; private set; }
         public static bool InPanda { get; private set; }
         public static bool InWisp { get; private set; }
+        public static bool InMages { get; private set; }
         public static bool IsAuberon { get; private set; }
 
         public static void OnInit()
@@ -79,6 +84,13 @@ namespace RazorEx
                 InWisp = true;
             else if (!isWisp && InWisp)
                 InWisp = false;
+
+            bool isMages = (World.Player.Position.InBounds(mages1UL, mages1BR) ||
+                            World.Player.Position.InBounds(mages2UL, mages2BR)) && World.Player.Map == 0;
+            if (isMages && !InMages)
+                InMages = true;
+            else if (!isMages && InMages)
+                InMages = false;
         }
 
         private static bool InBounds(this Point3D p, Point2D upperLeft, Point2D bottomRight)

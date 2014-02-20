@@ -58,9 +58,9 @@ namespace RazorEx.Addons
         private static void OnTarget(bool l, Serial s, Point3D p, ushort g)
         { healSerial = (s == World.Player.Serial) ? Serial.Zero : s; }
 
-        private static void Event_LocalizedMessage(Serial serial, int msg, string args)
+        private static bool? Event_LocalizedMessage(Serial serial, ItemID graphic, byte type, ushort hue, ushort font, int num, string name, string args)
         {
-            switch (msg)
+            switch (num)
             {
                 case 500956: // You begin applying the bandages.
                     IsHealing = true;
@@ -85,6 +85,7 @@ namespace RazorEx.Addons
                     IsHealing = false;
                     break;
             }
+            return null;
         }
 
         private static void WorldEx_MobileUpdated(Serial serial)

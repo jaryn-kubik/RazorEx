@@ -14,10 +14,10 @@ namespace RazorEx.Fixes
                    (item.ItemID >= 0x0E9C && item.ItemID <= 0x0E9E);
         }
 
-        private static void Event_LocalizedMessage(Serial serial, int msg, string args)
+        private static bool? Event_LocalizedMessage(Serial serial, ItemID graphic, byte type, ushort hue, ushort font, int num, string name, string args)
         {
-            if (msg != 500617)
-                return;
+            if (num != 500617)
+                return null;
 
             Item item = World.Player.Backpack.FindItem(0x2AFA) ?? World.Player.Backpack.FindItem(IsInstrument);
             if (item != null)
@@ -31,6 +31,7 @@ namespace RazorEx.Fixes
                     return true;
                 };
             }
+            return null;
         }
     }
 }

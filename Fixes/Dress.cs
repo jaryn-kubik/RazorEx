@@ -60,6 +60,12 @@ namespace RazorEx.Fixes
             Layer layer = GetLayer(item);
             Item original = World.Player.GetItemOnLayer(layer);
 
+            if (PositionCheck.InMages && !IsAllowedInMages(item, layer))
+            {
+                WorldEx.SendMessage("Dress blocked.");
+                return;
+            }
+
             if (original != null)
                 if (original.Serial == item.Serial)
                     return;
@@ -112,6 +118,15 @@ namespace RazorEx.Fixes
                             return bag;
                     }
             return World.Player.Backpack;
+        }
+
+        private static bool IsAllowedInMages(Item item, Layer layer)
+        {
+            if (layer == Layer.LeftHand)
+                return item.ItemID == 0x2D25 || item.ItemID == 0x0DF0 || item.IsShield();
+            if (layer == Layer.FirstValid)
+                return item.ItemID == 0x0DF4 || item.ItemID == 0x2253 || item.ItemID == 0x0EFA || item.ItemID == 0x2D50;
+            return true;
         }
     }
 }

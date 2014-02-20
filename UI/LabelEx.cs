@@ -10,6 +10,7 @@ namespace RazorEx.UI
             Text = text;
             Anchor = anchor;
             Size = TextRenderer.MeasureText(Text, Font);
+            Font = new Font(Font, style);
             FontSize = size;
             Margin = new Padding(margin);
             Enabled = false;

@@ -29,8 +29,8 @@ namespace RazorEx.UI
             Size = new Size(ConfigEx.GetAttribute(Size.Width, "sizeW", "Chat"),
                             ConfigEx.GetAttribute(Size.Height, "sizeH", "Chat"));
 
-            PacketHandler.RegisterServerToClientFilter(0xAE, OnSpeech);
-            PacketHandler.RegisterServerToClientFilter(0x1C, OnAsciiSpeech);
+            Event.ASCIIMessage += Event_ASCIIMessage;
+            Event.UnicodeMessage += Event_UnicodeMessage;
             PacketHandler.RegisterServerToClientViewer(0xBF, OnPartySpeech);
             instance = this;
             MainFormEx.Disconnected -= Close;
@@ -58,55 +58,42 @@ namespace RazorEx.UI
             }
         }
 
-        private void OnSpeech(Packet p, PacketHandlerEventArgs args)
+        private bool? Event_UnicodeMessage(Serial serial, ItemID graphic, byte type, ushort hue, ushort font, string lang, string name, string msg)
         {
-            p.Seek(9, System.IO.SeekOrigin.Begin);
-            byte type = p.ReadByte();
-            ushort color = p.ReadUInt16();
-            p.ReadUInt16();
-            string lang = p.ReadStringSafe(4);
-            string name = p.ReadStringSafe(30);
-            string text = p.ReadUnicodeStringSafe();
-
-            if ((type == 0 && color == 0x34 && text == "zZz") ||
-                (type == 2 && color == 0x225 && text.StartsWith("*is AFK (") && text.EndsWith(")*")))
-                return;
+            if ((type == 0 && hue == 0x34 && msg == "zZz") ||
+                (type == 2 && hue == 0x225 && msg.StartsWith("*is AFK (") && msg.EndsWith(")*")))
+                return null;
 
             if (type == 0x0D)
-                textBox.AddLine(string.Format("[G] {0}: {1}", name, text), guildColor);
-            else if (type != 0x0A && color != 0x03B2)
+                textBox.AddLine(string.Format("[G] {0}: {1}", name, msg), guildColor);
+            else if (type != 0x0A && hue != 0x03B2)
             {
                 if (name == "System")
                 {
-                    text = text.Trim();
-                    if ((text.StartsWith("Z herbare bylo vyjmuto") ||
-                        (text.StartsWith("Kolik") && text.EndsWith("chces vybrat?")) ||
-                        text.EndsWith("bylo vlozeno do herbare.")) &&
-                        color == 0x55C)
-                        return;
-                    textBox.AddLine(string.Format("[¤] {0}", text), Hues.GetHue(color).GetColor(30));
+                    if ((msg.StartsWith("Z herbare bylo vyjmuto") ||
+                        (msg.StartsWith("Kolik") && msg.EndsWith("chces vybrat?")) ||
+                        msg.EndsWith("bylo vlozeno do herbare.")) &&
+                        hue == 0x55C)
+                        return null;
+                    textBox.AddLine(string.Format("[¤] {0}", msg), Hues.GetHue(hue).GetColor(30));
                 }
                 else if (lang != "ENU")
-                    textBox.AddLine(string.Format("{0}: {1}", name, text), Hues.GetHue(color).GetColor(30));
+                    textBox.AddLine(string.Format("{0}: {1}", name, msg), Hues.GetHue(hue).GetColor(30));
             }
+            return null;
         }
 
-        private void OnAsciiSpeech(Packet p, PacketHandlerEventArgs args)
+        private bool? Event_ASCIIMessage(Serial serial, ItemID graphic, byte type, ushort hue, ushort font, string lang, string name, string msg)
         {
-            p.Seek(10, System.IO.SeekOrigin.Begin);
-            ushort color = p.ReadUInt16();
-            p.ReadUInt16();
-            string name = p.ReadStringSafe(30);
-            string text = p.ReadStringSafe();
-
-            if (name == "System" && color != 0x018B)
-                textBox.AddLine(string.Format("[×] {0}", text), Hues.GetHue(color).GetColor(30));
+            if (name == "System" && hue != 0x018B)
+                textBox.AddLine(string.Format("[×] {0}", msg), Hues.GetHue(hue).GetColor(30));
+            return null;
         }
 
         protected override void Dispose(bool disposing)
         {
-            PacketHandler.RemoveServerToClientFilter(0xAE, OnSpeech);
-            PacketHandler.RemoveServerToClientFilter(0x1C, OnAsciiSpeech);
+            Event.UnicodeMessage -= Event_UnicodeMessage;
+            Event.ASCIIMessage -= Event_ASCIIMessage;
             PacketHandler.RemoveServerToClientViewer(0xBF, OnPartySpeech);
 
             instance = null;
