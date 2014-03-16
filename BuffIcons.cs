@@ -42,7 +42,7 @@ namespace RazorEx
             if (obj != World.Player.Serial || World.Player.Hue != 0x07A8)
                 return;
             if (!buffs.ContainsKey(BuffIcon.WanderingPlague))
-                AddBuff(BuffIcon.WanderingPlague, "Wandering Plague", 125);
+                AddBuff(BuffIcon.WanderingPlague, "Wandering Plague", 130);
         }
 
         private static bool? Event_ASCIIMessage(Serial serial, ItemID graphic, byte type, ushort hue, ushort font, string lang, string name, string msg)

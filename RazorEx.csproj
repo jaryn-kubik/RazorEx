@@ -89,6 +89,7 @@
     <Compile Include="Fixes\GuildParty.cs" />
     <Compile Include="Fixes\MagicalScrolls.cs" />
     <Compile Include="Fixes\RuneBook.cs" />
+    <Compile Include="Skills\Carving.cs" />
     <Compile Include="Skills\Fishing.cs" />
     <Compile Include="Addons\PotionStack.cs" />
     <Compile Include="Addons\WeaponMoves.cs" />
