@@ -129,7 +129,7 @@ namespace RazorEx
                 {
                     ObjectPropertyList.OPLEntry entry =
                         ((ObjectPropertyList.OPLEntry)content[content.Count - 1]);
-                    if (entry.Number == 1042971 && entry.Args != null &&
+                    if (entry.Args != null &&
                         entry.Args.Contains("Consecrate Weapon"))
                         duration += 20;
                 }
