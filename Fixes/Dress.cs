@@ -71,7 +71,7 @@ namespace RazorEx.Fixes
                     return;
                 else
                     Undress(original);
-
+            
             if (layer == Layer.LeftHand && !item.IsShield())
             {
                 original = World.Player.GetItemOnLayer(Layer.FirstValid);
@@ -102,7 +102,8 @@ namespace RazorEx.Fixes
         {
             if (item.IsQuiver())
                 return Layer.MiddleTorso;
-            if (item.ItemID == 0x2D25)
+            if (item.ItemID == 0x2D25 || item.ItemID == 0x0F4F || item.ItemID == 0x0F50 || item.ItemID == 0x26CE ||
+                item.ItemID == 0x13FC || item.ItemID == 0x13FD)
                 return Layer.LeftHand;
             return (Layer)item.ItemID.ItemData.Quality;
         }
