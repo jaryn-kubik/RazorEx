@@ -43,15 +43,29 @@ namespace RazorEx.Fixes
                     if (dressList.Name == "base")
                         foreach (Serial item in dressList.Items)
                             DressInternal(item);
-            foreach (Serial item in list.Items)
-                DressInternal(item);
+
+            foreach (object item in list.Items)
+                if (item is Serial)
+                    Dress((Serial)item);
+                else if (item is ItemID)
+                    Dress((ItemID)item);
+                else
+                    throw new NotImplementedException();
         }
 
-        private static void Dress(Serial serial)
+        private static void Dress(ItemID itemID)
         {
-            DressInternal(serial);
+            Item item = WorldEx.FindItem(i => i.ItemID == itemID && i.RootContainer == World.Player && (!i.IsInBank || Bank.Opened))
+                        ?? WorldEx.FindItemG(i => i.ItemID == itemID && i.DistanceTo(World.Player) < 3);
+            if (item == null)
+                foreach (Item cont in WorldEx.FindItemsG(i => i.IsContainer && i.DistanceTo(World.Player) < 3))
+                    if ((item = cont.FindItem(itemID)) != null)
+                        break;
+            if (item != null)
+                DressInternal(item.Serial);
         }
 
+        private static void Dress(Serial serial) { DressInternal(serial); }
         private static void DressInternal(Serial serial)
         {
             Item item = World.FindItem(serial);
@@ -71,7 +85,7 @@ namespace RazorEx.Fixes
                     return;
                 else
                     Undress(original);
-            
+
             if (layer == Layer.LeftHand && !item.IsShield())
             {
                 original = World.Player.GetItemOnLayer(Layer.FirstValid);
