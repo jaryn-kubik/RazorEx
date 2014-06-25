@@ -6,15 +6,25 @@ namespace RazorEx.Addons
 {
     public static class MassMove
     {
+        private enum MoveType { IgnoreColor, UseColor, Except, NonExcept }
+
         public static void OnInit()
         {
-            Command.Register("move", args => Targeting.OneTimeTarget((l, s, p, g) => Timer.DelayedCallback(TimeSpan.FromMilliseconds(500), () => Targeting.OneTimeTarget((l2, s2, p2, g2) => Move(s, s2, false))).Start()));
-            Command.Register("movec", args => Targeting.OneTimeTarget((l, s, p, g) => Timer.DelayedCallback(TimeSpan.FromMilliseconds(500), () => Targeting.OneTimeTarget((l2, s2, p2, g2) => Move(s, s2, true))).Start()));
-            Command.Register("movee", args => Targeting.OneTimeTarget((l, s, p, g) => Timer.DelayedCallback(TimeSpan.FromMilliseconds(500), () => Targeting.OneTimeTarget((l2, s2, p2, g2) => MoveE(s, s2, true))).Start()));
-            Command.Register("movene", args => Targeting.OneTimeTarget((l, s, p, g) => Timer.DelayedCallback(TimeSpan.FromMilliseconds(500), () => Targeting.OneTimeTarget((l2, s2, p2, g2) => MoveE(s, s2, false))).Start()));
+            Command.Register("move", args => Move(args, MoveType.IgnoreColor));
+            Command.Register("movec", args => Move(args, MoveType.UseColor));
+            Command.Register("movee", args => Move(args, MoveType.Except));
+            Command.Register("movene", args => Move(args, MoveType.NonExcept));
         }
 
-        private static void Move(Serial source, Serial target, bool color)
+        private static void Move(string[] args, MoveType type)
+        {
+            int count;
+            if (args.Length < 1 || !int.TryParse(args[0], out count))
+                count = int.MaxValue;
+            Targeting.OneTimeTarget((l, s, p, g) => Timer.DelayedCallback(TimeSpan.FromMilliseconds(500), () => Targeting.OneTimeTarget((l2, s2, p2, g2) => Move(s, s2, type, count))).Start());
+        }
+
+        private static void Move(Serial source, Serial target, MoveType type, int count)
         {
             Item sItem = World.FindItem(source);
             Item tItem = World.FindItem(target);
@@ -22,20 +32,19 @@ namespace RazorEx.Addons
                 return;
             Item container = sItem.Container as Item;
             if (container != null)
-                foreach (Item item in container.FindItems(sItem.ItemID, i => !color || i.Hue == sItem.Hue, recurse: false))
+                foreach (Item item in container.FindItems(sItem.ItemID, i => Filter(i, sItem, type), false).Take(count))
                     DragDrop.Move(item, tItem);
         }
 
-        private static void MoveE(Serial source, Serial target, bool exceptional)
+        private static bool Filter(Item item, Item source, MoveType type)
         {
-            Item sItem = World.FindItem(source);
-            Item tItem = World.FindItem(target);
-            if (sItem == null || tItem == null || !tItem.IsContainer)
-                return;
-            Item container = sItem.Container as Item;
-            if (container != null)
-                foreach (Item item in container.FindItems(sItem.ItemID, i => exceptional ? IsExcept(i) : !IsExcept(i), recurse: false))
-                    DragDrop.Move(item, tItem);
+            if (type == MoveType.UseColor)
+                return item.Hue == source.Hue;
+            if (type == MoveType.Except)
+                return IsExcept(item);
+            if (type == MoveType.NonExcept)
+                return !IsExcept(item);
+            return true;
         }
 
         private static bool IsExcept(Item item)

@@ -93,7 +93,7 @@ namespace RazorEx
         public static bool IsMy(this Item item) { return item.RootContainer == World.Player && !item.IsInBank; }
         public static bool IsBlessed(this Item item) { return item.ObjPropList.m_Content.OfType<ObjectPropertyList.OPLEntry>().Any(p => p.Number == 1038021); }
         public static bool IsElementalBody(this Item item)
-        { return item.ItemID == 0x2006 && item.Hue != 0x0835 && ((item.Amount >= 0x000D && item.Amount <= 0x0010) || (item.Amount >= 0x006B && item.Amount <= 0x0071) || (item.Amount >= 0x009E && item.Amount <= 0x00A3) || item.Amount == 0x00A6 || item.Amount == 0x02F0); }
+        { return item.ItemID == 0x2006 && item.Hue != 0x0835 && ((item.Amount >= 0x000D && item.Amount <= 0x0010) || (item.Amount >= 0x006B && item.Amount <= 0x0071) || (item.Amount >= 0x009E && item.Amount <= 0x00A3) || item.Amount == 0x00A6 || item.Amount == 0x02F0 || item.Amount == 0x0083); }
         public static bool IsPlayer(this Mobile mobile)
         { return mobile.Body == 0x0190 || mobile.Body == 0x0191 || mobile.Body == 0x025D || mobile.Body == 0x025E; }
 
