@@ -26,7 +26,7 @@ namespace RazorEx.Fixes
             Mobile result = null;
             foreach (Mobile mobile in World.MobilesInRange(Config.GetInt("LTRange")))
             {
-                if (FriendsAgent.IsFriend(mobile) || PacketHandlers.Party.Contains(mobile.Serial) || mobile.Blessed || mobile.Serial == World.Player.Serial || Array.IndexOf(notoriety, mobile.Notoriety) == -1 || mobile.Renamable)
+                if (FriendsAgent.IsFriend(mobile) || PacketHandlers.Party.Contains(mobile.Serial) || mobile.Serial == World.Player.Serial || Array.IndexOf(notoriety, mobile.Notoriety) == -1 || mobile.Renamable)
                     continue;
                 if (mobile.Notoriety == 6)
                 {
