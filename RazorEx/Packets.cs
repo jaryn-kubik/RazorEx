@@ -10,7 +10,10 @@ namespace RazorEx
         {
             EnsureCapacity(50 + (text.Length * 2) + 3);
             Write((byte)0xC0);
-            Write((ushort)(World.Player.SpeechHue == 0 ? 50 : World.Player.SpeechHue));
+            if (World.Player == null || World.Player.SpeechHue == 0)
+                Write((ushort)50);
+            else
+                Write(World.Player.SpeechHue);
             Write((ushort)3);
             WriteAsciiFixed("CSY", 4);
             Write((byte)0);

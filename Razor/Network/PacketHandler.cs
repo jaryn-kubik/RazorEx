@@ -28,11 +28,11 @@ namespace Assistant
 
 	public class PacketHandler
 	{
-		private static Hashtable m_ClientViewers;
-		private static Hashtable m_ServerViewers;
+        public static Hashtable m_ClientViewers;
+        public static Hashtable m_ServerViewers;
 
-		private static Hashtable m_ClientFilters;
-		private static Hashtable m_ServerFilters;
+        public static Hashtable m_ClientFilters;
+        public static Hashtable m_ServerFilters;
 
 		static PacketHandler()
 		{
@@ -43,7 +43,7 @@ namespace Assistant
 			m_ServerFilters = new Hashtable();
 		}
 
-		internal static void RegisterClientToServerViewer( int packetID, PacketViewerCallback callback )
+        public static void RegisterClientToServerViewer(int packetID, PacketViewerCallback callback)
 		{
 			ArrayList list = (ArrayList)m_ClientViewers[packetID];
 			if ( list == null )
@@ -51,7 +51,7 @@ namespace Assistant
 			list.Add( callback );
 		}
 
-		internal static void RegisterServerToClientViewer( int packetID, PacketViewerCallback callback )
+		public static void RegisterServerToClientViewer( int packetID, PacketViewerCallback callback )
 		{
 			ArrayList list = (ArrayList)m_ServerViewers[packetID];
 			if ( list == null )
@@ -59,21 +59,21 @@ namespace Assistant
 			list.Add( callback );
 		}
 
-		internal static void RemoveClientToServerViewer( int packetID, PacketViewerCallback callback )
+        public static void RemoveClientToServerViewer(int packetID, PacketViewerCallback callback)
 		{
 			ArrayList list = (ArrayList)m_ClientViewers[packetID];
 			if ( list != null )
 				list.Remove( callback );
 		}
 
-		internal static void RemoveServerToClientViewer( int packetID, PacketViewerCallback callback )
+        public static void RemoveServerToClientViewer(int packetID, PacketViewerCallback callback)
 		{
 			ArrayList list = (ArrayList)m_ServerViewers[packetID];
 			if ( list != null )
 				list.Remove( callback );
 		}
 
-		internal static void RegisterClientToServerFilter( int packetID, PacketFilterCallback callback )
+        public static void RegisterClientToServerFilter(int packetID, PacketFilterCallback callback)
 		{
 			ArrayList list = (ArrayList)m_ClientFilters[packetID];
 			if ( list == null )
@@ -81,7 +81,7 @@ namespace Assistant
 			list.Add( callback );
 		}
 
-		internal static void RegisterServerToClientFilter( int packetID, PacketFilterCallback callback )
+        public static void RegisterServerToClientFilter(int packetID, PacketFilterCallback callback)
 		{
 			ArrayList list = (ArrayList)m_ServerFilters[packetID];
 			if ( list == null )
@@ -89,14 +89,14 @@ namespace Assistant
 			list.Add( callback );
 		}
 
-		internal static void RemoveClientToServerFilter( int packetID, PacketFilterCallback callback )
+        public static void RemoveClientToServerFilter(int packetID, PacketFilterCallback callback)
 		{
 			ArrayList list = (ArrayList)m_ClientFilters[packetID];
 			if ( list != null )
 				list.Remove( callback );
 		}
 
-		internal static void RemoveServerToClientFilter( int packetID, PacketFilterCallback callback )
+        public static void RemoveServerToClientFilter(int packetID, PacketFilterCallback callback)
 		{
 			ArrayList list = (ArrayList)m_ServerFilters[packetID];
 			if ( list != null )
@@ -168,7 +168,7 @@ namespace Assistant
 		}
 
 		private static PacketHandlerEventArgs m_Args = new PacketHandlerEventArgs();
-		private static bool ProcessViewers( ArrayList list, PacketReader p )
+        public static bool ProcessViewers(ArrayList list, PacketReader p)
 		{
 			m_Args.Reinit();
 

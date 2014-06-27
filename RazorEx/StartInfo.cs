@@ -70,7 +70,7 @@ namespace RazorEx
                 table.SetColumnSpan(buttonOK, 3);
                 Controls.Add(table);
 
-                boxClient.Text = ConfigEx.GetElement(Ultima.Client.GetFilePath("client.exe") ?? string.Empty, "Client");
+                boxClient.Text = ConfigEx.GetElement(Ultima.Files.GetFilePath("client.exe") ?? string.Empty, "Client");
                 boxServer.Text = ConfigEx.GetElement("185.21.223.28", "Server");
                 boxPort.Text = ConfigEx.GetElement("2593", "Port");
                 buttonClient.Click += buttonClient_Click;

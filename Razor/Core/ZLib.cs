@@ -29,13 +29,13 @@ namespace Assistant
 	public class ZLib
 	{
 		[DllImport( "zlib" )]
-		internal static extern string zlibVersion();
+        public static extern string zlibVersion();
 		[DllImport( "zlib" )]
-		internal static extern ZLibError compress(byte[] dest, ref int destLength, byte[] source, int sourceLength);
+        public static extern ZLibError compress(byte[] dest, ref int destLength, byte[] source, int sourceLength);
 		[DllImport( "zlib" )]
-		internal static extern ZLibError compress2(byte[] dest, ref int destLength, byte[] source, int sourceLength, ZLibCompressionLevel level);
+        public static extern ZLibError compress2(byte[] dest, ref int destLength, byte[] source, int sourceLength, ZLibCompressionLevel level);
 		[DllImport( "zlib" )]
-		internal static extern ZLibError uncompress(byte[] dest, ref int destLen, byte[] source, int sourceLen);
+        public static extern ZLibError uncompress(byte[] dest, ref int destLen, byte[] source, int sourceLen);
 	}
 
 	// Be careful when writing raw data, as it may confuse the GZBlockIn if not accounted for when reading.

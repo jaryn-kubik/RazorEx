@@ -451,7 +451,7 @@ namespace Assistant
 			UNKNOWN,
 		}
 
-		private const int SHARED_BUFF_SIZE = 524288; // 262144; // 250k
+        private const int SHARED_BUFF_SIZE = 262144; // 262144; // 250k
 
 		[StructLayout( LayoutKind.Explicit, Size=8+SHARED_BUFF_SIZE )]
 		private struct Buffer
@@ -478,7 +478,7 @@ namespace Assistant
 		[DllImport( "Crypt.dll" )]
 		private static unsafe extern void SetCustomTitle( string title );
 		[DllImport( "Crypt.dll" )]
-		internal static unsafe extern int InitializeLibrary(string version);
+        public static unsafe extern int InitializeLibrary(string version);
 		[DllImport( "Crypt.dll" )]
 		private static unsafe extern IntPtr GetCommMutex();
 		[DllImport( "Crypt.dll" )]
@@ -793,10 +793,10 @@ namespace Assistant
 		}
 
 		private static bool m_ClientEnc = false;
-		internal static bool ClientEncrypted { get { return m_ClientEnc; } set { m_ClientEnc = value; } }
+        public static bool ClientEncrypted { get { return m_ClientEnc; } set { m_ClientEnc = value; } }
 
 		private static bool m_ServerEnc = false;
-		internal static bool ServerEncrypted { get { return m_ServerEnc; } set { m_ServerEnc = value; } }
+        public static bool ServerEncrypted { get { return m_ServerEnc; } set { m_ServerEnc = value; } }
 
 		internal static bool InstallHooks( IntPtr mainWindow )
 		{
@@ -854,7 +854,7 @@ namespace Assistant
 				if ( path != null && path != string.Empty )
 					SetDataPath( Path.GetDirectoryName( path ) );
 				else
-					SetDataPath(Path.GetDirectoryName(Ultima.Files.Directory));
+                    SetDataPath(Path.GetDirectoryName(Ultima.Files.RootDir));
 			}
 			catch
 			{
@@ -869,8 +869,8 @@ namespace Assistant
 		
 		private static uint m_ServerIP;
 		private static ushort m_ServerPort;
-		
-		internal static void SetConnectionInfo( IPAddress addr, int port )
+
+        public static void SetConnectionInfo(IPAddress addr, int port)
 		{
 #pragma warning disable 618
 			m_ServerIP = (uint)addr.Address;
@@ -1203,7 +1203,7 @@ namespace Assistant
 
 					try
 					{
-						SetDataPath(Ultima.Files.Directory);
+                        SetDataPath(Ultima.Files.RootDir);
 					}
 					catch
 					{
@@ -1347,7 +1347,7 @@ namespace Assistant
 			return retVal;
 		}
 
-		internal static void SendToServer( Packet p )
+        public static void SendToServer(Packet p)
 		{
 			if ( !m_Ready || PacketPlayer.Playing )
 				return;
@@ -1365,7 +1365,7 @@ namespace Assistant
 			}
 		}
 
-		internal static void SendToServer( PacketReader pr )
+        public static void SendToServer(PacketReader pr)
 		{
 			if ( !m_Ready || PacketPlayer.Playing )
 				return;
@@ -1373,7 +1373,7 @@ namespace Assistant
 			SendToServer( MakePacketFrom( pr ) );
 		}
 
-		internal static void SendToClient( Packet p )
+        public static void SendToClient(Packet p)
 		{
 			if ( !m_Ready || PacketPlayer.Playing || p.Length <= 0 )
 				return;
@@ -1391,7 +1391,7 @@ namespace Assistant
 			}
 		}
 
-		internal static void SendToClient( PacketReader pr )
+        public static void SendToClient(PacketReader pr)
 		{
 			if ( !m_Ready || PacketPlayer.Playing )
 				return;

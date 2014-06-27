@@ -51,7 +51,7 @@ namespace Assistant
 		private System.Windows.Forms.GroupBox groupBox5;
 		private System.Windows.Forms.Button removeDress;
 		private System.Windows.Forms.Button addDress;
-		private System.Windows.Forms.ListBox dressList;
+        public System.Windows.Forms.ListBox dressList;
 		private System.Windows.Forms.GroupBox groupBox6;
 		private System.Windows.Forms.Button targItem;
 		private System.Windows.Forms.ListBox dressItems;
@@ -102,7 +102,7 @@ namespace Assistant
 		private System.Windows.Forms.Button playMacro;
 		private System.Windows.Forms.Button recMacro;
 		private System.Windows.Forms.CheckBox loopMacro;
-		private System.Windows.Forms.Button dressNow;
+        public System.Windows.Forms.Button dressNow;
 		private System.Windows.Forms.Button undressList;
 		private System.Windows.Forms.CheckBox spamFilter;
 		private System.Windows.Forms.PictureBox screenPrev;
@@ -118,7 +118,7 @@ namespace Assistant
 		private System.Windows.Forms.Button agentB6;
 		private System.Windows.Forms.CheckBox undressConflicts;
 		private System.Windows.Forms.CheckBox titlebarImages;
-		private System.Windows.Forms.CheckBox showWelcome;
+        protected System.Windows.Forms.CheckBox showWelcome;
 		private System.Windows.Forms.CheckBox highlightSpellReags;
 		private System.Windows.Forms.ColumnHeader skillHDRlock;
 		private System.ComponentModel.IContainer components;
@@ -2768,13 +2768,11 @@ namespace Assistant
 			if ( !ClientCommunication.InstallHooks( this.Handle ) ) // WaitForInputIdle done here
 			{
 				m_CanClose = true;
-				SplashScreen.End();
 				this.Close();
 				System.Diagnostics.Process.GetCurrentProcess().Kill();
 				return;
 			}
 
-			SplashScreen.Message = LocString.Welcome;
             InitConfig();
 
 			this.Show();
@@ -2794,8 +2792,6 @@ namespace Assistant
 				
 			m_Tip.Active = true;
             m_Tip.SetToolTip(titleStr, Language.GetString(LocString.TitleBarTip));
-
-            SplashScreen.End();
 		}
 		
 		private bool m_Initializing = false;
@@ -3044,7 +3040,7 @@ namespace Assistant
 			}
 		}
 
-		private Version m_Ver = System.Reflection.Assembly.GetCallingAssembly().GetName().Version;
+		protected Version m_Ver = System.Reflection.Assembly.GetCallingAssembly().GetName().Version;
 
 		private uint m_OutPrev;
 		private uint m_InPrev;
@@ -3711,9 +3707,6 @@ namespace Assistant
 
 		private void dressNow_Click(object sender, System.EventArgs e)
 		{
-			DressList dress = (DressList)dressList.SelectedItem;
-			if ( dress != null && World.Player != null )
-				dress.Dress();
 		}
 		
 		private void undressList_Click(object sender, System.EventArgs e)

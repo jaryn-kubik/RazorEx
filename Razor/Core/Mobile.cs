@@ -178,7 +178,9 @@ namespace Assistant
 			set{ m_Female =	value; }
 		}
 
-		public byte	Notoriety
+	    public bool Renamable { get; set; }
+
+	    public byte	Notoriety
 		{
 			get{ return	m_Notoriety;  }
 			set

@@ -59,7 +59,7 @@ namespace Assistant
 
 		private static byte[] m_Buffer = new byte[4]; // Internal format buffer.
 		private MemoryStream m_Stream;
-		private bool m_DynSize;
+        public bool m_DynSize;
 		private byte m_PacketID;
 
 		public Packet()

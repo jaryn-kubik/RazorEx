@@ -7,7 +7,7 @@ namespace Assistant
 {
 	public class DressList
 	{
-		private static ArrayList m_List = new ArrayList();
+		public static ArrayList m_List = new ArrayList();
 
 		public static void Redraw( ListBox box )
 		{
@@ -134,7 +134,11 @@ namespace Assistant
 			HotKey.Add( HKCategory.Dress, HKSubCat.None, String.Format( "Dress: {0}", list.Name ), new HotKeyCallback( list.Dress ) );
 			HotKey.Add( HKCategory.Dress, HKSubCat.None, String.Format( "Undress: {0}", list.Name ), new HotKeyCallback( list.Undress ) );
 			HotKey.Add( HKCategory.Dress, HKSubCat.None, String.Format( "Toggle: {0}", list.Name ), new HotKeyCallback( list.Toggle ) );
+		    if (OnAdd != null)
+		        OnAdd();
 		}
+
+	    public static Action OnAdd;
 
 		public static void Remove( DressList list )
 		{
@@ -145,7 +149,7 @@ namespace Assistant
 		}
 
 		private ArrayList m_Items;
-		private Serial m_UndressBag;
+        public Serial m_UndressBag;
 		private string m_Name;
 
 		public DressList( string name )

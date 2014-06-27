@@ -1276,7 +1276,7 @@ namespace Assistant
 			m.Hits = p.ReadUInt16();
 			m.HitsMax = p.ReadUInt16();
 
-			p.ReadBoolean();//CanBeRenamed
+			m.Renamable = p.ReadBoolean();//CanBeRenamed
 
 			byte type = p.ReadByte();
 

@@ -739,27 +739,7 @@ namespace Assistant
 
         public static string GetUserDirectory(string name)
         {
-            string appDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Razor");
-
-            if (!Directory.Exists(appDir))
-            {
-                Directory.CreateDirectory(appDir);
-
-                string counters = Path.Combine(GetInstallDirectory(), "counters.xml");
-                if (File.Exists(counters))
-                    File.Copy(counters, Path.Combine(appDir, "counters.xml"));
-
-                CopyUserFiles(appDir, "Profiles");
-                CopyUserFiles(appDir, "Macros");
-            }
-
-            if (name.Length > 0)
-                name = Path.Combine(appDir, name);
-            else
-                name = appDir;
-            
-            Engine.EnsureDirectory(name);
-            return name;
+            return GetInstallDirectory(name);
         }
 
         public static string GetUserDirectory()
@@ -769,21 +749,7 @@ namespace Assistant
 
         public static string GetInstallDirectory(string name)
         {
-            string dir = GetRegString(Microsoft.Win32.Registry.LocalMachine, "InstallDir");
-
-            try
-            {
-                if (dir == null || dir == "")
-                {
-                    dir = Directory.GetCurrentDirectory();
-                    if (dir != null)
-                        SetRegString(Microsoft.Win32.Registry.LocalMachine, "InstallDir", dir);
-                }
-            }
-            catch
-            {
-            }
-
+            string dir = Application.StartupPath;
             if (name.Length > 0)
                 dir = Path.Combine(dir, name);
             Engine.EnsureDirectory(dir);

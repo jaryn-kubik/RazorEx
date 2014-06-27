@@ -59,12 +59,12 @@ namespace Assistant
 	{
 		private int m_Name;
 		private string m_SName;
-		private HotKeyCallback m_Callback;
+        public HotKeyCallback m_Callback;
 		private HotKeyCallbackState m_CallbackState;
 		private bool m_SendToUO;
 		private int m_Key;
 		private ModKeys m_Mod;
-		private TreeNode m_Node;
+        public TreeNode m_Node;
 		private object m_State;
 		private DateTime m_LastTriggerTime = DateTime.MinValue;
 

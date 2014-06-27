@@ -6,7 +6,7 @@ namespace Assistant
 {
 	public class ObjectPropertyList
 	{
-		private class OPLEntry
+        public class OPLEntry
 		{
 			public int Number = 0;
 			public string Args = null;
@@ -25,10 +25,10 @@ namespace Assistant
 		private ArrayList m_StringNums = new ArrayList();
 
 		private int m_Hash = 0;
-		private ArrayList m_Content = new ArrayList();
+        public ArrayList m_Content = new ArrayList();
 		
 		private int m_CustomHash = 0;
-		private ArrayList m_CustomContent = new ArrayList();
+        public ArrayList m_CustomContent = new ArrayList();
 
 		private UOEntity m_Owner = null;
 

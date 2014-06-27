@@ -19,21 +19,21 @@ namespace Assistant
 			m_ShardName = "[None]";
 		}
 
-		internal static Hashtable Servers { get{ return m_Servers; } }
-		internal static Hashtable Items { get{ return m_Items; } }
-		internal static Hashtable Mobiles { get{ return m_Mobiles; } }
+		public static Hashtable Servers { get{ return m_Servers; } }
+        public static Hashtable Items { get { return m_Items; } }
+        public static Hashtable Mobiles { get { return m_Mobiles; } }
 
-		internal static Item FindItem( Serial serial )
+        public static Item FindItem(Serial serial)
 		{
 			return m_Items[serial] as Item;
 		}
 
-		internal static Mobile FindMobile( Serial serial )
+        public static Mobile FindMobile(Serial serial)
 		{
 			return m_Mobiles[serial] as Mobile;
 		}
 
-		internal static ArrayList MobilesInRange( int range )
+        public static ArrayList MobilesInRange(int range)
 		{
 			ArrayList list = new ArrayList();
 
@@ -42,7 +42,7 @@ namespace Assistant
 
 			foreach ( Mobile m in World.Mobiles.Values )
 			{
-				if ( Utility.InRange( World.Player.Position, m.Position, World.Player.VisRange ) )
+                if (Utility.InRange(World.Player.Position, m.Position, range))
 					list.Add( m );
 			}
 
@@ -77,7 +77,7 @@ namespace Assistant
 			m_Items.Remove( item.Serial );
 		}
 
-		internal static PlayerData Player
+		public static PlayerData Player
 		{
 			get{ return m_Player; }
 			set{ m_Player = value; }

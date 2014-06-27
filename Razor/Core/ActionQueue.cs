@@ -87,7 +87,7 @@ namespace Assistant
 			HotKey.Add( HKCategory.Misc, LocString.DropCur, new HotKeyCallback( DropCurrent ) );
 		}
 
-		private static void DropCurrent()
+        public static void DropCurrent()
 		{
 			Log( "Drop current requested on {0}", m_Holding );
 
@@ -98,17 +98,13 @@ namespace Assistant
 				else
 					ClientCommunication.SendToServer( new DropRequest( m_Holding, World.Player.Position, Serial.Zero ) ); 
 			}
-			else
-			{
-				World.Player.SendMessage( MsgLevel.Force, LocString.NoHold );
-			}
 
 			Clear();
 		}
 
 		private static int m_LastID;
 
-		private static Serial m_Pending, m_Holding;
+        public static Serial m_Pending, m_Holding;
 		private static Item m_HoldingItem;
 		private static bool m_ClientLiftReq = false;
 		private static DateTime m_Lifted = DateTime.MinValue;

@@ -107,7 +107,7 @@ namespace Assistant.HotKeys
 		}
 
 		private static DateTime m_LastSync;
-		private static void Resync()
+        public static void Resync()
 		{
 			if ( DateTime.Now - m_LastSync > TimeSpan.FromSeconds( 1.0 ) )
 			{

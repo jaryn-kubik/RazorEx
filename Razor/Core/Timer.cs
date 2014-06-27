@@ -149,7 +149,7 @@ namespace Assistant
 		private TimeSpan m_Delay;
 		private TimeSpan m_Interval;
 		private bool m_Running;
-		private int m_Index, m_Count;
+        public int m_Index, m_Count;
 
 		protected abstract void OnTick();
 

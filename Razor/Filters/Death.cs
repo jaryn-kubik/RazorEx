@@ -21,6 +21,7 @@ namespace Assistant.Filters
 		public override void OnFilter( PacketReader p, PacketHandlerEventArgs args )
 		{
 			args.Block = true;
+		    Assistant.Macros.MacroManager.Stop();
 		}
 	}
 }

@@ -27,14 +27,12 @@ namespace RazorEx
             {
                 TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
                 Engine.m_Running = true;
-                Engine.m_BaseDir = Application.StartupPath;
                 Engine.m_MainWnd = new UI.MainFormEx();
                 ClientCommunication.ClientEncrypted = true;
                 ClientCommunication.ServerEncrypted = false;
                 ClientCommunication.InitializeLibrary("1.0.12");
 
-                Client.Directories.Clear();
-                Client.Directories.Add(Path.GetDirectoryName(StartInfo.ClientPath));
+                Files.SetMulPath(Path.GetDirectoryName(StartInfo.ClientPath));
 
                 if (!Language.Load("ENU"))
                     throw new Exception("Unable to load Razor_lang.enu");

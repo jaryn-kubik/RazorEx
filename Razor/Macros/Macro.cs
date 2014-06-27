@@ -16,7 +16,7 @@ namespace Assistant.Macros
 		private MacroWaitAction m_Wait;
 		private int m_CurrentAction;
 		private bool m_Loop;
-		private bool m_Loaded;
+        protected bool m_Loaded;
 		private ListBox m_ListBox;
 		private Stack m_IfStatus;
 
@@ -337,7 +337,6 @@ namespace Assistant.Macros
 				return false;
 		}
 
-		private static MacroWaitAction PauseB4Loop = new PauseAction( TimeSpan.FromSeconds( 0.1 ) );
 		//return true to continue the macro, false to stop (macro's over)
 		public bool ExecNext()
 		{
@@ -357,9 +356,6 @@ namespace Assistant.Macros
 								Engine.MainWindow.WaitDisplay.Text = "";
 							m_CurrentAction = -1;
 							m_IfStatus.Clear();
-							PauseB4Loop.Perform();
-							PauseB4Loop.Parent = this;
-							m_Wait = PauseB4Loop;
 							return true;
 						}
 						else
@@ -557,9 +553,6 @@ namespace Assistant.Macros
 
 						Reset();
 
-						PauseB4Loop.Perform();
-						PauseB4Loop.Parent = this;
-						m_Wait = PauseB4Loop;
 					}
 					else
 					{

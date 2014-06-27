@@ -28,7 +28,7 @@ namespace Assistant
 		private static bool m_Intercept;
 		private static bool m_HasTarget;
 		private static bool m_ClientTarget;
-		private static TargetInfo m_LastTarget;
+        public static TargetInfo m_LastTarget;
 		private static TargetInfo m_LastGroundTarg;
 		private static TargetInfo m_LastBeneTarg;
 		private static TargetInfo m_LastHarmTarg;
@@ -43,13 +43,24 @@ namespace Assistant
 
 		private static Serial m_LastCombatant;
 
-		private delegate bool QueueTarget();
+		public delegate bool QueueTarget();
 		private static QueueTarget TargetSelfAction = new QueueTarget( DoTargetSelf );
 		private static QueueTarget LastTargetAction = new QueueTarget( DoLastTarget );
 		private static QueueTarget m_QueueTarget;
 
-		
-		private static uint m_SpellTargID = 0;
+        public static QueueTarget QueuedTarget
+        {
+            get { return m_QueueTarget; }
+            set { m_QueueTarget = value; }
+        }
+
+        public static bool ClientTarget
+        {
+            get { return m_ClientTarget; }
+            set { m_ClientTarget = value; }
+        }
+
+	    private static uint m_SpellTargID = 0;
 		public static uint SpellTargetID { get { return m_SpellTargID; } set { m_SpellTargID = value; } }
 
 		private static ArrayList m_FilterCancel = new ArrayList();
@@ -123,25 +134,24 @@ namespace Assistant
 		private static void OnClearQueue()
 		{
 			Targeting.ClearQueue();
-			World.Player.OverheadMessage( LocString.TQCleared );
 		}
 
-		internal static void OneTimeTarget( TargetResponseCallback onTarget )
+        public static void OneTimeTarget(TargetResponseCallback onTarget)
 		{
 			OneTimeTarget( false, onTarget, null );
 		}
 
-		internal static void OneTimeTarget( bool ground, TargetResponseCallback onTarget )
+        public static void OneTimeTarget(bool ground, TargetResponseCallback onTarget)
 		{
 			OneTimeTarget( ground, onTarget, null );
 		}
 
-		internal static void OneTimeTarget( TargetResponseCallback onTarget, CancelTargetCallback onCancel )
+        public static void OneTimeTarget(TargetResponseCallback onTarget, CancelTargetCallback onCancel)
 		{
 			OneTimeTarget( false, onTarget, onCancel );
 		}
 
-		internal static void OneTimeTarget( bool ground, TargetResponseCallback onTarget, CancelTargetCallback onCancel )
+        public static void OneTimeTarget(bool ground, TargetResponseCallback onTarget, CancelTargetCallback onCancel)
 		{
 			if ( m_Intercept && m_OnCancel != null )
 			{
@@ -168,7 +178,7 @@ namespace Assistant
 			ClearQueue();
 		}
 
-		internal static void CancelOneTimeTarget()
+        public static void CancelOneTimeTarget()
 		{
 			m_ClientTarget = m_HasTarget = false;
 
@@ -212,7 +222,6 @@ namespace Assistant
 
 			m_LTWasSet = true;
 
-			World.Player.SendMessage( MsgLevel.Force, LocString.LTSet );
 			if ( serial.IsMobile )
 			{
 				LastTargetChanged();
@@ -630,7 +639,6 @@ namespace Assistant
 
 			ClientCommunication.SendToClient( new ChangeCombatant( m ) );
 			m_LastCombatant = m.Serial;
-			World.Player.SendMessage( MsgLevel.Force, LocString.NewTargSet );
 			
 			bool wasSmart = Config.GetBool( "SmartLastTarget" );
 			if ( wasSmart )
@@ -668,8 +676,6 @@ namespace Assistant
 			}
 			else if ( forceQ || Config.GetBool( "QueueTargets" ) )
 			{
-				if ( !forceQ )
-					World.Player.OverheadMessage( LocString.QueuedTS );
 				m_QueueTarget = TargetSelfAction;
 			}
 		}
@@ -724,8 +730,6 @@ namespace Assistant
 			}
 			else if ( forceQ || Config.GetBool( "QueueTargets" ) )
 			{
-				if ( !forceQ )
-					World.Player.OverheadMessage( LocString.QueuedLT );
 				m_QueueTarget = LastTargetAction;
 			}
 		}
@@ -859,7 +863,7 @@ namespace Assistant
 			EndIntercept();
 		}
 
-		private static void CancelTarget()
+        public static void CancelTarget()
 		{
 			OnClearQueue();
 			CancelClientTarget();
