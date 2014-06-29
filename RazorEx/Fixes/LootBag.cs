@@ -12,7 +12,7 @@ namespace RazorEx.Fixes
             {
                 if (!World.Items.ContainsKey(bag))
                 {
-                    Item item = World.Player.Backpack.FindItem(0x0E75, 0x044C);
+                    Item item = World.Player.Backpack.FindItem(0x0E75, i => i.Hue == 0x050F || i.Hue == 0x044C, false);
                     bag = item == null ? Serial.Zero : item.Serial;
                 }
                 return bag;
