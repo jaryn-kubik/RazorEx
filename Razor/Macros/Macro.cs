@@ -194,7 +194,7 @@ namespace Assistant.Macros
 
 		public void Save()
 		{
-			if ( m_Actions.Count == 0 )
+			if ( m_Actions.Count == 0 || m_Path == null )
 				return;
 
 			using ( StreamWriter writer = new StreamWriter( m_Path ) )
