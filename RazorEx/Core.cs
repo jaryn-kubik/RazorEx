@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using Ultima;
 
 [assembly: AssemblyTitle("RazorEx")]
-[assembly: AssemblyVersion("2.5.2.*")]
+[assembly: AssemblyVersion("2.5.3.*")]
 
 namespace RazorEx
 {
@@ -33,6 +33,8 @@ namespace RazorEx
                 ClientCommunication.InitializeLibrary("1.0.12");
 
                 Files.SetMulPath(Path.GetDirectoryName(StartInfo.ClientPath));
+                Ultima.Map.Felucca = new Ultima.Map(0, 0, 7168, 4096);
+                Ultima.Map.Trammel = new Ultima.Map(0, 1, 7168, 4096);
 
                 if (!Language.Load("ENU"))
                     throw new Exception("Unable to load Razor_lang.enu");
