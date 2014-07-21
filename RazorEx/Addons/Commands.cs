@@ -15,6 +15,17 @@ namespace RazorEx.Addons
             Command.Register("hide", args => Targeting.OneTimeTarget(Hide));
             Command.Register("info", args => Targeting.OneTimeTarget(Info));
             Command.Register("dye", Dye);
+            Command.Register("bank", Bank);
+        }
+
+        private static void Bank(string[] args)
+        {
+            Item item = World.Player.Backpack.FindItem(0x1F1C, 0x0489) ??
+                        WorldEx.FindItemG(0x1F1C, 0x0489, i => i.DistanceTo(World.Player) < 5);
+            if (item != null)
+                WorldEx.SendToServer(new DoubleClick(item.Serial));
+            else
+                WorldEx.SendMessage("No bank crystal found.");
         }
 
         private static void Hide(bool location, Serial serial, Point3D p, ushort gfxid) { WorldEx.SendToClient(new RemoveObject(serial)); }
