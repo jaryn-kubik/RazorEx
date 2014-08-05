@@ -26,6 +26,8 @@ namespace RazorEx.UI
                 if (IsPrimaryAbility || IsSecondaryAbility)
                     WeaponAbilities.WeaponSwitched += SetGump;
             }
+            if (spell.GetID() == 403)//evasion
+                Event.LocalizedMessage += OnEvasion;
         }
 
         private bool IsPrimaryAbility { get { return spell.Circle == 100 && spell.Number == 0; } }
@@ -40,6 +42,15 @@ namespace RazorEx.UI
                               (WeaponMoves.Current == MoveType.SecondaryAbility && IsSecondaryAbility))
                            : (int)WeaponMoves.Current == spell.GetID();
             }
+        }
+
+        private bool? OnEvasion(Serial serial, ItemID graphic, byte type, ushort hue, ushort font, int num, string name, string args)
+        {
+            if (num == 1063120)
+                gump.Set((ushort)GetID(), 0x0021);
+            else if (num == 1063121)
+                gump.Set((ushort)GetID());
+            return null;
         }
 
         private bool? Event_LocalizedMessage(Serial serial, ItemID graphic, byte type, ushort hue, ushort font, int num, string name, string args)
