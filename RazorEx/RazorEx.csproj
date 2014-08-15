@@ -134,7 +134,7 @@
     <Compile Include="Addons\AutoGrab.cs" />
     <Compile Include="Addons\BloodOath.cs" />
     <Compile Include="Addons\BoneCarving.cs" />
-    <Compile Include="Addons\LegendaryPickaxe.cs" />
+    <Compile Include="Addons\LegendaryTools.cs" />
     <Compile Include="Addons\Other.cs" />
     <Compile Include="Addons\Spells.cs" />
     <Compile Include="Addons\GiftOfLife.cs" />

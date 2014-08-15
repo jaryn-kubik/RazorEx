@@ -5,6 +5,7 @@
     <DoubleAxe primary="DoubleStrike" secondary="WhirlwindAttack">0x0F4B</DoubleAxe>
     <ExecutionersAxe primary="BleedAttack" secondary="MortalStrike">0x0F45</ExecutionersAxe>
     <Hatchet primary="ArmorIgnore" secondary="Disarm">0x0F43</Hatchet>
+    <Hatchet2 primary="ArmorIgnore" secondary="Disarm">0x0F44</Hatchet2>
     <LargeBattleAxe primary="WhirlwindAttack" secondary="BleedAttack">0x13FB</LargeBattleAxe>
     <Pickaxe primary="DoubleStrike" secondary="Disarm">0x0E86</Pickaxe>
     <TwoHandedAxe primary="DoubleStrike" secondary="ShadowStrike">0x1443</TwoHandedAxe>
