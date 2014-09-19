@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using Ultima;
 
 [assembly: AssemblyTitle("RazorEx")]
-[assembly: AssemblyVersion("3.0.3.*")]
+[assembly: AssemblyVersion("3.0.4.*")]
 
 namespace RazorEx
 {
