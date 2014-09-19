@@ -1,5 +1,6 @@
 ﻿using Assistant;
 using Assistant.Macros;
+using RazorEx.Fixes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,7 +17,9 @@ namespace RazorEx.Addons
 
         public static void OnInit()
         {
-            Core.AddHotkey("Honor", () => WorldEx.SendToServer(new InvokeVirtue(0x31)));
+            Core.AddHotkey("Honor", Honor);
+            Core.AddHotkey("Honor/Attack closest non-friendly", HonorAttack);
+            Core.AddHotkey("Attack closest non-friendly", Attack);
             Core.AddHotkey("Grab", () => new SpeechAction(MessageType.Regular, World.Player.SpeechHue, 3, null, null, ".grab").Perform());
             Command.Register("key", args => UseKey());
             Core.AddHotkey("UseKey", UseKey);
@@ -28,6 +31,22 @@ namespace RazorEx.Addons
             Core.AddHotkey("Use AntiSpell Ball", () => UseItem(0x0E73, 0x0702));
             Core.AddHotkey("Use Smoke Bomb", () => UseItem(0x2808, 0));
             Command.Register("blast", FireBlast);
+        }
+
+        private static void Honor() { WorldEx.SendToServer(new InvokeVirtue(0x31)); }
+        private static void HonorAttack()
+        {
+            TargetingEx.ClosestTarget(3, 4, 5, 6);
+            Targeting.CancelTarget();
+            Targeting.LastTarget(true);
+            Honor();
+            BloodOath.AttackLast();
+        }
+
+        private static void Attack()
+        {
+            TargetingEx.ClosestTarget(3, 4, 5, 6);
+            BloodOath.AttackLast();
         }
 
         private static void Drink()

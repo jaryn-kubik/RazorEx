@@ -16,6 +16,17 @@ namespace RazorEx.Addons
             Command.Register("info", args => Targeting.OneTimeTarget(Info));
             Command.Register("dye", Dye);
             Command.Register("bank", Bank);
+            Command.Register("morph", Morph);
+        }
+
+        private static void Morph(string[] args)
+        {
+            ushort body;
+            if (args.Length > 0 && ushort.TryParse(args[0], out body))
+            {
+                World.Player.Body = body;
+                WorldEx.SendToClient(new MobileUpdate(World.Player));
+            }
         }
 
         private static void Bank(string[] args)

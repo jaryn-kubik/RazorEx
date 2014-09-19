@@ -57,7 +57,7 @@ namespace RazorEx.Addons
                 lastSerial = lastOath = 0;
         }
 
-        private static void AttackLast()
+        public static void AttackLast()
         {
             if (Targeting.m_LastTarget != null && Targeting.m_LastTarget.Serial != lastOath)
             {

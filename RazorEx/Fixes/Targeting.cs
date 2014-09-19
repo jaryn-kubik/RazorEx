@@ -14,7 +14,7 @@ namespace RazorEx.Fixes
             Core.AddHotkey(node, "Closest Non-Friendly", () => ClosestTarget(3, 4, 5, 6));
         }
 
-        private static void ClosestTarget(params byte[] notoriety)
+        public static void ClosestTarget(params byte[] notoriety)
         {
             Mobile closest = GetClosest(notoriety);
             if (closest != null)
