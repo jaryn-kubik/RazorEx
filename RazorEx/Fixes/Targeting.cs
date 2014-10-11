@@ -36,7 +36,9 @@ namespace RazorEx.Fixes
                     if (mobile.Body == 0x02F4) // picovina golema
                         continue;
 
-                    if (mobile.Body == 0x0033 && mobile.Hue == 0x4001 && mobile.Name.StartsWith("a nature's fury"))
+                    if (mobile.Body == 0x0033 && mobile.Hue == 0x4001 &&
+                        (mobile.Name.StartsWith("a nature's fury") ||
+                         (mobile.Name.StartsWith("a fire fury") && !PositionCheck.InFire)))
                         continue;
 
                     if (mobile.Body == 0x02EC && mobile.Hue == 0x4001) // wraith form
